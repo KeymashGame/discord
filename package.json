@@ -4,10 +4,9 @@
   "description": "Official Discord bot for Discord",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "^12.5.1",
-    "node-fetch": "^2.6.1"
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

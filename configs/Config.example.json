@@ -2,6 +2,8 @@
   "token": "",
   "prefix": "k!",
   "api": {
-    "user": "https://keyma.sh/api/user/list"
-  }
+    "user": "https://keyma.sh/api/v1/user/list",
+    "rank": "https://raw.githubusercontent.com/Keyma-sh/media/main/ranks",
+    "profile" : "https://keyma.sh/profile"
+  },
 }
