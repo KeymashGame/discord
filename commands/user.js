@@ -22,25 +22,25 @@ module.exports = {
         fetch(api.user + '?' + new URLSearchParams(params))
         .then(res => res.json())
         .then(results => {
-            if (results[0]) {
+            if (results && results.data && results.data[0]) {
                 const userEmbed = new Discord.MessageEmbed()
                     .setColor('#FB923C')
-                    .setAuthor(`${args[0].trim().replace('-', '#')}`, `${results[0].userAvatar}`, `${api.profile}/${args[0].trim()}`)
-                    .setThumbnail(`${api.rank}/${results[0].Competitive.Rank.toLowerCase()}.png`)
-                    .setDescription(results[0].userDescription)
+                    .setAuthor(`${args[0].trim().replace('-', '#')}`, `${results.data[0].userAvatar}`, `${api.profile}/${args[0].trim()}`)
+                    .setThumbnail(`${api.rank}/${results.data[0].Competitive.Games >= 10 ? results.data[0].Competitive.Rank.toLowerCase() : 'unranked'}.png`)
+                    .setDescription(results.data[0].userDescription)
                     .addFields(
-                        { name: 'Rank', value: `${results[0].Competitive.Rank}`},
-                        { name: 'Level', value: `${(results[0].Level.Index || 1)}`},
-                        { name: 'Skill Points', value: `${results[0].Competitive.SR}`},
-                        { name: 'Highest WPM', value: `${results[0].maxWPM.toFixed(2)}`},
-                        { name: 'Casual Games', value: `${results[0].CasualMatchesTotal}`},
-                        { name: 'Won', value: `${results[0].CasualMatchesWon}`, inline: true},
-                        { name: 'Lost', value: `${results[0].CasualMatchesLost}`, inline: true},
-                        { name: 'Quit', value: `${results[0].CasualMatchesQuit}`, inline: true},
-                        { name: 'Ranked Games', value: `${results[0].Competitive.Games}`},
-                        { name: 'Won', value: `${results[0].userRankedMatchesWon}`, inline: true},
-                        { name: 'Lost', value: `${results[0].userRankedMatchesLost}`, inline: true},
-                        { name: 'Quit', value: `${results[0].userRankedMatchesQuit}`, inline: true},
+                        { name: 'Rank', value: `${results.data[0].Competitive.Games >= 10 ? results.data[0].Competitive.Rank : 'Unranked'}`},
+                        { name: 'Level', value: `${(results.data[0].Level.Index || 1)}`},
+                        { name: 'Skillrating', value: `${results.data[0].Competitive.Games >= 10 ? results.data[0].Competitive.SR : 'N/A'}`},
+                        { name: 'Highest WPM', value: `${results.data[0].maxWPM.toFixed(2)}`},
+                        { name: 'Casual Games', value: `${results.data[0].CasualMatchesTotal}`},
+                        { name: 'Won', value: `${results.data[0].CasualMatchesWon}`, inline: true},
+                        { name: 'Lost', value: `${results.data[0].CasualMatchesLost}`, inline: true},
+                        { name: 'Quit', value: `${results.data[0].CasualMatchesQuit}`, inline: true},
+                        { name: 'Ranked Games', value: `${results.data[0].Competitive.Games}`},
+                        { name: 'Won', value: `${results.data[0].userRankedMatchesWon}`, inline: true},
+                        { name: 'Lost', value: `${results.data[0].userRankedMatchesLost}`, inline: true},
+                        { name: 'Quit', value: `${results.data[0].userRankedMatchesQuit}`, inline: true},
                         
                     )
                 message.channel.send(userEmbed);

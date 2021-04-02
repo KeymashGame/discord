@@ -14,12 +14,12 @@ module.exports = {
             'en': 'English',
         };
 
-        if (results) {
+        if (results && results.data) {
             const userEmbed = new Discord.MessageEmbed()
                 .setColor('#FB923C')
                 .setTitle('Ongoing Tournaments')
 
-            results.filter(({ tournamentStatusCode }) => tournamentStatusCode == 1).forEach((result) => {
+            results.data.filter(({ tournamentStatusCode }) => tournamentStatusCode == 1).forEach((result) => {
                 userEmbed.addFields(
                     { name: 'Name', value: result.tournamentName, inline: true},
                     { name: 'Language', value: localeStrings[result.tournamentLocale], inline: true},
