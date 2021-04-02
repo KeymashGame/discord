@@ -43,7 +43,6 @@ module.exports = {
                         { name: 'Quit', value: `${results[0].userRankedMatchesQuit}`, inline: true},
                         
                     )
-
                 message.channel.send(userEmbed);
             } else
                 return message.channel.send('Unable to find user, please try again!');
