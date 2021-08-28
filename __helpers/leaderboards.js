@@ -16,6 +16,7 @@ module.exports = (type) => {
 					limit: 10
 				}
 				const queryString = new URLSearchParams(params)
+				console.log(`GET ${endpoint}/leaderboards/${type}?${queryString}`.yellow)
 				fetch(`${endpoint}/leaderboards/${type}?${queryString}`)
 					.then(res => res.json())
 					.then( (data) => {

@@ -8,8 +8,11 @@ module.exports = {
     description: 'Grabs information regarding a Keyma.sh Account.',
     run: async (client, message, args, guild) => {
         try {
-            const data = await player('info', args[0] ? 'user' : 'discord', args[0] ? args[0] : message.author.id)
-            const ranked = await player('ranked', args[0] ? 'user' : 'discord', args[0] ? args[0] : message.author.id)
+            if(!args[0])
+                return message.channel.send("You must supply a user to search!");
+
+            const data = await player('info', 'user', args[0])
+            const ranked = await player('ranked', 'user', args[0])
             const stats = await player('statistics', 'discord', data.playerId)
 
             const userEmbed = new MessageEmbed()
@@ -32,7 +35,6 @@ module.exports = {
                 )
             return message.channel.send({ embed: userEmbed });
         } catch (err) {
-
             const embed_error = new MessageEmbed()
               .setTitle('Operation failed')
               .setColor('RANDOM')
