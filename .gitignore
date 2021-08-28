@@ -103,5 +103,9 @@ dist
 
 # TernJS port file
 .tern-port
-configs/Config.json
+
+# Configuration files
+config.json
+
+# I don't know why is this here
 package-lock.json
