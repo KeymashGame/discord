@@ -2,23 +2,24 @@
   "name": "discord",
   "version": "1.0.0",
   "description": "Official Discord bot for Discord",
-  "main": "app.js",
-  "dependencies": {
-    "discord.js": "^12.5.1",
-    "node-fetch": "^2.6.1"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Keyma-sh/discord.git"
+    "url": "git+https://github.com/DefinitelyNotJah/discord.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Keyma-sh/discord/issues"
+    "url": "https://github.com/DefinitelyNotJah/discord/issues"
   },
-  "homepage": "https://github.com/Keyma-sh/discord#readme"
+  "homepage": "https://github.com/DefinitelyNotJah/discord#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord.js": "^12.5.3",
+    "node-fetch": "^2.6.1"
+  }
 }
