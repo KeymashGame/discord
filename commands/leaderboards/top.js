@@ -32,7 +32,7 @@ const formulateLeaderboards = (keys) => {
 }
 module.exports = {
     name: 'top',
-    description: 'Shows TOP 10 keymashers with the fastest speed.',
+    description: 'Shows TOP 10 keymashers with the fastest speed',
     run: async (client, message, args, guild) => {
         try {
             const data = await leaderboards('statistics')
