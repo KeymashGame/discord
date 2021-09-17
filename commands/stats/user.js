@@ -5,7 +5,7 @@ const { profileUrl } = require('../../config');
 
 module.exports = {
     name: 'user',
-    description: 'Grabs information regarding a Keyma.sh Account.',
+    description: 'Grabs information regarding a Keyma.sh Account',
     run: async (client, message, args, guild) => {
         try {
             if(!args[0])
