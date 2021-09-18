@@ -23,40 +23,40 @@ module.exports = {
             let playerRole
             switch (true) {
                 case (x < 20) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "0-19");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "0-19 WPM");
                     break;
                 case (x < 40) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "20-39");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "20-39 WPM");
                     break; 
                 case (x < 60) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "40-59");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "40-59 WPM");
                     break; 
                 case (x < 80) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "60-79");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "60-79 WPM");
                     break; 
                 case (x < 100) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "80-99");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "80-99 WPM");
                     break; 
                 case (x < 120) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "100-119");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "100-119 WPM");
                     break;
                 case (x < 140) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "120-139");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "120-139 WPM");
                     break;
                 case (x < 160) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "140-159");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "140-159 WPM");
                     break;
                 case (x < 180) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "160-179");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "160-179 WPM");
                     break;
                 case (x < 200) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "180-199");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "180-199 WPM");
                     break;
                 case (x > 200) :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "200+");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "200+ WPM");
                     break;
                 default :
-                    playerRole = message.guild.roles.cache.find(r => r.name === "0-19");
+                    playerRole = message.guild.roles.cache.find(r => r.name === "0-19 WPM");
                     break;
             }
             if(!playerRole)
