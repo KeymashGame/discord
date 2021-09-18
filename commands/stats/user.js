@@ -11,8 +11,10 @@ module.exports = {
             if(!args[0])
                 return message.channel.send("You must supply a user to search!");
 
-            const data = await player('info', 'user', args[0])
-            const ranked = await player('ranked', 'user', args[0])
+            const playerUsername = args[0].trim()
+
+            const data = await player('info', 'user', playerUsername)
+            const ranked = await player('ranked', 'discord', data.playerId)
             const stats = await player('statistics', 'discord', data.playerId)
 
             const userEmbed = new MessageEmbed()
