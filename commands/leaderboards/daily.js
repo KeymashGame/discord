@@ -46,7 +46,6 @@ module.exports = {
                 .setDescription(leaderboardString)
             return message.channel.send({ embed: userEmbed });
         } catch (err) {
-            console.log(err)
             const embed_error = new MessageEmbed()
               .setTitle('Operation failed')
               .setColor('RANDOM')
