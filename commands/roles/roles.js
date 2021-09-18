@@ -10,11 +10,11 @@ module.exports = {
     run: async (client, message, args, guild) => {
         try {
             if (!message.guild.me.permissions.has("MANAGE_ROLES"))
-                throw new Error('BOT requires MANAGE ROLES permissions in order to run this command.')
+                throw new Error('BOT requires \`MANAGE ROLES\` permissions in order to run this command.')
 
             const discordData = await discord('get', message.author.id)
             if(discordData === false)
-                return message.channel.send('Please link your account via k!link.')
+                return message.channel.send('Please link your account via \`k!link\`.')
 
             const ranked = await player('ranked', 'discord', discordData.playerId)
             const stats = await player('statistics', 'discord', discordData.playerId)

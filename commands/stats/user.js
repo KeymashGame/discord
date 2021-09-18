@@ -13,7 +13,7 @@ module.exports = {
             if(!args[0]) {
                 discordData = await discord('get', message.author.id)
                 if(discordData === false)
-                    return message.channel.send('Please include a username or link your account via k!link.')
+                    return message.channel.send('Please include a username or link your account via \`k!link\`.')
             }
 
             const playerUsername = args[0] ? args[0].trim() : `${discordData.name}-${discordData.discriminator}`

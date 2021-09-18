@@ -4,15 +4,15 @@ const discord = require('../../__helpers/discord');
 const { prefix } = require('../../config');
 
 module.exports = {
-    name: 'link',
-    description: 'Links your Discord account with that of a keyma.sh user',
+    name: 'confirm',
+    description: 'Confirms your Discord account with that of a keyma.sh user',
     run: async (client, message, args, guild) => {
         try {
             if(!args[0]) {
-                throw new Error(`Please include a keyma.sh username as an argument.\nProper usage:\n\`\`\`\n${prefix}link GNiK-8712\`\`\``)
+                throw new Error(`Please include your confirmation code.\nIt should be in your keyma.sh notifications.\nProper usage:\n\`\`\`\n${prefix}confirm 544776\`\`\``)
             }
             
-            const data = await discord('link', message.author.id, args[0])
+            const data = await discord('confirm', message.author.id, '', args[0])
 
             const userEmbed = new MessageEmbed()
                 .setColor('#FB923C')
