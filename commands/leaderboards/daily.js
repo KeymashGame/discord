@@ -24,7 +24,9 @@ const formulateLeaderboards = (keys) => {
                 placement = place.toString()
         }
         const placementSpace = 3 - placement.length
-        const space = 30 - nameString.length
+        let space = 30 - nameString.length
+        if(space <= 0)
+            space = 1 
         const wpmSpace = 7 - key.wpm.toString().length
         leaderboards += `${placement}${" ".repeat(placementSpace)}${nameString}${" ".repeat(space)}${key.wpm}${" ".repeat(wpmSpace)}WPM\n`
     })
@@ -44,6 +46,7 @@ module.exports = {
                 .setDescription(leaderboardString)
             return message.channel.send({ embed: userEmbed });
         } catch (err) {
+            console.log(err)
             const embed_error = new MessageEmbed()
               .setTitle('Operation failed')
               .setColor('RANDOM')
