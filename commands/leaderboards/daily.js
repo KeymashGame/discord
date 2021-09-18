@@ -25,24 +25,23 @@ const formulateLeaderboards = (keys) => {
         }
         const placementSpace = 3 - placement.length
         const space = 30 - nameString.length
-        const wpmSpace = 7 - key.highestWPM.toString().length
-        leaderboards += `${placement}${" ".repeat(placementSpace)}${nameString}${" ".repeat(space)}${key.highestWPM}${" ".repeat(wpmSpace)}WPM\n`
+        const wpmSpace = 7 - key.wpm.toString().length
+        leaderboards += `${placement}${" ".repeat(placementSpace)}${nameString}${" ".repeat(space)}${key.wpm}${" ".repeat(wpmSpace)}WPM\n`
     })
     leaderboards += '```'
     return leaderboards;
 }
 module.exports = {
-    name: 'top',
-    description: 'Shows TOP 10 keymashers with the fastest speed',
+    name: 'daily',
+    description: 'Shows recent high-scores of keyma.sh',
     run: async (client, message, args, guild) => {
         try {
-            const data = await leaderboards('statistics')
-            const leaderboardString = formulateLeaderboards(data.data)
+            const data = await leaderboards('recent')
+            const leaderboardString = formulateLeaderboards(data)
             const userEmbed = new MessageEmbed()
-                .setTitle('Top 10 fastest WPM!')
+                .setTitle('Recent highscores of today!')
                 .setColor('RANDOM')
                 .setDescription(leaderboardString)
-                .setFooter('These are definitely some fast mfs!')
             return message.channel.send({ embed: userEmbed });
         } catch (err) {
             const embed_error = new MessageEmbed()

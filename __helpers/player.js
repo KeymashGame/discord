@@ -33,7 +33,6 @@ module.exports = (type, option, value) => {
 					.then( (data) => {
 						if(!data)
 							return reject(new Error('An error has occurred during search.'))
-						console.log(data)
 						if(data && data.error && data.error.toLowerCase().includes('unable to get ranked') && type.toLowerCase() === 'ranked')
 							return resolve(rankedJsonObject)
 						if(data && data.error)
@@ -56,7 +55,6 @@ module.exports = (type, option, value) => {
 					.then( (data) => {
 						if(!data)
 							return reject(new Error('An error has occurred during search.'))
-						console.log(data)
 						if(data && data.error && data.error.toLowerCase().includes('unable to get ranked') && type.toLowerCase() === 'ranked')
 							return resolve(rankedJsonObject)
 						if(data && data.error)
