@@ -62,9 +62,9 @@ module.exports = {
             if(!playerRole)
                 throw new Error('Unfortunately, the role you\'ve requested does not exist now, contact a Moderator to create it.')
             
-            rankedRole = message.guild.roles.cache.find(r => r.name === `S${ranked.seasonId} ${ranked.Rank.Rank}`);
-            if(rankedRole)
-                await message.guild.members.cache.get(message.author.id).roles.add(rankedRole)
+            // rankedRole = message.guild.roles.cache.find(r => r.name === `S${ranked.seasonId} ${ranked.Rank.Rank}`);
+            // if(rankedRole)
+            //    await message.guild.members.cache.get(message.author.id).roles.add(rankedRole)
 
             await message.guild.members.cache.get(message.author.id).roles.add(playerRole)
 
