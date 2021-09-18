@@ -4,10 +4,10 @@ const { endpoint } = require('../config.json');
 
 module.exports = (type) => {
 	return new Promise( (resolve, reject) => {
-		if(type.toLowerCase() !== 'statistics' && type.toLowerCase() !== 'recent')
-			return reject(new Error('Invalid type. Must be either statistics or recent'))
+		if(type.toLowerCase() !== 'recent' && type.toLowerCase() !== 'statistics')
+			return reject(new Error('Invalid type. Must be either recent or statistics'))
 
-		switch (type.toLowerCase) {
+		switch (type.toLowerCase()) {
 			default:
 				const params = {
 					modeId: 1,

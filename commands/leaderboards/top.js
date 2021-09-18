@@ -25,7 +25,8 @@ const formulateLeaderboards = (keys) => {
         }
         const placementSpace = 3 - placement.length
         const space = 30 - nameString.length
-        leaderboards += `${placement}${" ".repeat(placementSpace)}${nameString}${" ".repeat(space)}${key.highestWPM} WPM\n`
+        const wpmSpace = 7 - key.highestWPM.toString().length
+        leaderboards += `${placement}${" ".repeat(placementSpace)}${nameString}${" ".repeat(space)}${key.highestWPM}${" ".repeat(wpmSpace)}WPM\n`
     })
     leaderboards += '```'
     return leaderboards;

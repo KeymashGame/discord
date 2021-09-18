@@ -1,6 +1,7 @@
 {
 	"discordToken" : "",
 	"prefix" : "k!",
-	"endpoint" : "https://apiv2.keyma.sh/api/v2",
+	"endpoint" : "https://api.keyma.sh/api/v2",
+	"discordEndpoint" : "https://api.keyma.sh/discord/v2",
 	"profileUrl" : "https://keyma.sh/profile"
 }
