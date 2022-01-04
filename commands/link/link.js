@@ -12,7 +12,7 @@ module.exports = {
                 throw new Error(`Please include a keyma.sh username as an argument.\nProper usage:\n\`\`\`\n${prefix}link GNiK-8712\`\`\``)
             }
             
-            let username = args.join('%20')
+            let username = args.join(' ')
             
             const data = await discord('link', message.author.id, username);
 
