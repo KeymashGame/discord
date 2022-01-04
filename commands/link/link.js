@@ -12,7 +12,9 @@ module.exports = {
                 throw new Error(`Please include a keyma.sh username as an argument.\nProper usage:\n\`\`\`\n${prefix}link GNiK-8712\`\`\``)
             }
             
-            const data = await discord('link', message.author.id, args[0])
+            let username = args.join('%20')
+            
+            const data = await discord('link', message.author.id, username);
 
             const userEmbed = new MessageEmbed()
                 .setColor('#FB923C')
