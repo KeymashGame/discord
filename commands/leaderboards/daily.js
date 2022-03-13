@@ -35,7 +35,7 @@ const formulateLeaderboards = (keys) => {
 }
 module.exports = {
     name: 'daily',
-    description: 'Shows recent high-scores of keyma.sh',
+    description: 'Shows recent high-scores of keymash.io',
     run: async (client, message, args, guild) => {
         try {
             const data = await leaderboards('recent')

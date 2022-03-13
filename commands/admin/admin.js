@@ -29,7 +29,7 @@ module.exports = {
                         "fields": [
                           {
                             "name": "Important",
-                            "value": "Please read through our Trello in case your issue has already been reported. Any duplicated bug reports will be instantly deleted. \n\nhttps://trello.com/b/Rlx2qSvq/keymash\n\nIt is also mandatory to follow our Troubleshooting steps as 90% of issues reported are usually caused by cache.\n\nhttps://keyma.sh/about/troubleshooting"
+                            "value": "Please read through our Trello in case your issue has already been reported. Any duplicated bug reports will be instantly deleted. \n\nhttps://trello.com/b/Rlx2qSvq/keymash\n\nIt is also mandatory to follow our Troubleshooting steps as 90% of issues reported are usually caused by cache.\n\nhttps://keymash.io/about/troubleshooting"
                           },
                           {
                             "name": "Message Format",
@@ -55,20 +55,20 @@ module.exports = {
                     break;
                 case 'welcome' :
                     embed = {
-                          "title": "KEYMA.SH - The future of competitive typing",
+                          "title": "Keymash - The future of competitive typing",
                           "description": "Welcome to the official Discord! Please take a moment to read below for some information and rules!",
                           "color": 16486972,
                           "thumbnail": {
-                            "url": "https://i.imgur.com/wsuxxwC.png"
+                            "url": "https://i.imgur.com/TpL6tUJ.png"
                           },
                           "fields": [
                             {
                               "name": "Play Now",
-                              "value": "<https://keyma.sh/>"
+                              "value": "<https://keymash.io/>"
                             },
                             {
                               "name": "Issue Tracker",
-                              "value": "<https://github.com/Keyma-sh/game-tracker>"
+                              "value": "<https://github.com/Keyma-sh/next>"
                             },
                             {
                               "name": "Discord Invite",
@@ -123,15 +123,15 @@ module.exports = {
                         },
                         "fields": [
                           {
-                            "name": "Want to add your favorite quote or text to Keyma.sh (we support multiple languages)?",
-                            "value": "<https://keyma.sh/submit>"
+                            "name": "Want to add your favorite quote or text to Keymash (we support multiple languages)?",
+                            "value": "<https://keymash.io/submit>"
                           },
                           {
-                            "name": "Help us out in translating Keyma.sh in 15+ different languages",
-                            "value": "<https://keyma.sh/translation>"
+                            "name": "Help us out in translating Keymash in 15+ different languages",
+                            "value": "<https://keymash.io/translation>"
                           },
                           {
-                            "name": "Directly support Keyma.sh (you get a badge!)",
+                            "name": "Directly support Keymash (you get a badge!)",
                             "value": "<https://patreon.com/keymashgame>"
                           },
                         ]

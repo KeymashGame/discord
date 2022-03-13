@@ -5,11 +5,11 @@ const { prefix } = require('../../config');
 
 module.exports = {
     name: 'confirm',
-    description: 'Confirms your Discord account with that of a keyma.sh user',
+    description: 'Confirms your Discord account with that of a keymash.io user',
     run: async (client, message, args, guild) => {
         try {
             if(!args[0]) {
-                throw new Error(`Please include your confirmation code.\nIt should be in your keyma.sh notifications.\nProper usage:\n\`\`\`\n${prefix}confirm 544776\`\`\``)
+                throw new Error(`Please include your confirmation code.\nIt should be in your keymash.io notifications.\nProper usage:\n\`\`\`\n${prefix}confirm 544776\`\`\``)
             }
             
             const data = await discord('confirm', message.author.id, '', args[0])

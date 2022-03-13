@@ -5,11 +5,11 @@ const { prefix } = require('../../config');
 
 module.exports = {
     name: 'link',
-    description: 'Links your Discord account with that of a keyma.sh user',
+    description: 'Links your Discord account with that of a keymash.io user',
     run: async (client, message, args, guild) => {
         try {
             if(!args[0]) {
-                throw new Error(`Please include a keyma.sh username as an argument.\nProper usage:\n\`\`\`\n${prefix}link GNiK-8712\`\`\``)
+                throw new Error(`Please include a keymash.io username as an argument.\nProper usage:\n\`\`\`\n${prefix}link GNiK-8712\`\`\``)
             }
             
             const data = await discord('link', message.author.id, args[0])
