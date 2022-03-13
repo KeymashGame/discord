@@ -20,7 +20,7 @@ module.exports = {
 
             const channel = message.client.channels.cache.find(ch => ch.name === args[0]);
             let embed = null;
-            switch (args[0].toLowerCase) {
+            switch (args[0]) {
                 case 'bug-reports' :
                     embed = {
                         "title": "Bug Reporting Information",
