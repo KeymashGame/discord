@@ -26,7 +26,7 @@ module.exports = (type, option, value) => {
 					playerId: value.toString(),
 					worldId: 0
 				}
-				const discordQueryString = new URLSearchParams(paramsDiscord)
+				const discordQueryString = decodeURI(new URLSearchParams(paramsDiscord))
 				console.log(`GET ${endpoint}/player/${type}?${discordQueryString}`.yellow)
 				fetch(`${endpoint}/player/${type}?${discordQueryString}`)
 					.then(res => res.json())
@@ -48,7 +48,7 @@ module.exports = (type, option, value) => {
 					name: value.toString(),
 					worldId: 0
 				}
-				const defaultQueryString = new URLSearchParams(paramsDefault)
+				const defaultQueryString = decodeURI(new URLSearchParams(paramsDefault))
 				console.log(`GET ${endpoint}/player/${type}?${defaultQueryString}`.yellow)
 				fetch(`${endpoint}/player/${type}?${defaultQueryString}`)
 					.then(res => res.json())
