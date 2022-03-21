@@ -15,8 +15,7 @@ module.exports = {
                 if(discordData === false)
                     return message.channel.send('Please include a username or link your account via \`k!link\`.')
             }
-
-            const playerUsername = args[0] ? args[0].trim() : `${discordData.name}-${discordData.discriminator}`
+            const playerUsername = args.join(' ') ? args.join(' ').trim() : `${discordData.name}-${discordData.discriminator}`
 
             const data = await player('info', 'user', playerUsername)
             const ranked = await player('ranked', 'discord', data.playerId)
