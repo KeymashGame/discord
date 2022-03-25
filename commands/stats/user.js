@@ -24,7 +24,7 @@ module.exports = {
             const userEmbed = new MessageEmbed()
                 .setColor('#FB923C')
                 .setAuthor(`${data.name}#${data.discriminator}`, `${data.avatarSrc}`, `${profileUrl}/${data.name}-${data.discriminator}`)
-                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/${ranked.Rank.Rank.toLowerCase()}.png`)
+                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/png/${ranked.Rank.Rank.toLowerCase()}.png`)
                 .setDescription(`${data.description}`)
                 .addFields(
                     { name: 'Rank', value: `${ranked.Rank.Rank}`},
