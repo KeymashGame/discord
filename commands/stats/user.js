@@ -15,8 +15,7 @@ module.exports = {
                 if(discordData === false)
                     return message.channel.send('Please include a username or link your account via \`k!link\`.')
             }
-
-            const playerUsername = args[0] ? args[0].trim() : `${discordData.name}-${discordData.discriminator}`
+            const playerUsername = args.join(' ') ? args.join(' ').trim() : `${discordData.name}-${discordData.discriminator}`
 
             const data = await player('info', 'user', playerUsername)
             const ranked = await player('ranked', 'discord', data.playerId)
@@ -25,7 +24,7 @@ module.exports = {
             const userEmbed = new MessageEmbed()
                 .setColor('#FB923C')
                 .setAuthor(`${data.name}#${data.discriminator}`, `${data.avatarSrc}`, `${profileUrl}/${data.name}-${data.discriminator}`)
-                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/${ranked.Rank.Rank.toLowerCase()}.png`)
+                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/png/${ranked.Rank.Rank.toLowerCase()}.png`)
                 .setDescription(`${data.description}`)
                 .addFields(
                     { name: 'Rank', value: `${ranked.Rank.Rank}`},

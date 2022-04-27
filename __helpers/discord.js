@@ -45,7 +45,7 @@ module.exports = (type, discordId, userName, code) => {
 					name: userName,
 					discordId
 				}
-				const bodyData = JSON.stringify(data)
+				const bodyData = decodeURI(JSON.stringify(data))
 				console.log(`POST ${discordEndpoint}/${type}`.yellow)
 				fetch(`${discordEndpoint}/${type}?`, {
 					method: 'POST',
@@ -67,7 +67,7 @@ module.exports = (type, discordId, userName, code) => {
 				const params = {
 					discordId
 				}
-				const queryString = new URLSearchParams(params)
+				const queryString = decodeURI(new URLSearchParams(params))
 				console.log(`GET ${discordEndpoint}/${type}?${queryString}`.yellow)
 				fetch(`${discordEndpoint}/${type}?${queryString}`)
 					.then(res => res.json())
