@@ -1,5 +1,4 @@
 {
-	"discordToken" : "",
 	"prefix" : "k!",
 	"endpoint" : "https://api.keymash.io/api/v2",
 	"discordEndpoint" : "https://api.keymash.io/discord/v2",

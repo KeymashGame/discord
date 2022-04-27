@@ -25,5 +25,7 @@ jobs:
 
       - name: Run Next App
         run: |
-          pm2 startOrRestart ecosystem.config.js
+          pm2 startOrRestart ecosystem.config.js --env production
         working-directory: ./
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}

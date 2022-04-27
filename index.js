@@ -18,7 +18,7 @@ client.categories = readdirSync("./commands/");
 
 const startBot = () => {
   try {
-    client.login(discordToken)
+    client.login(process.env.DISCORD_TOKEN)
   } catch (err) {
     console.log(colors.red(err));
   }

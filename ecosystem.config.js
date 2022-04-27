@@ -4,6 +4,14 @@ module.exports = {
         name: 'keymash-discord',
         script: 'npm',
         args: 'start',
+        env: {
+            NODE_ENV: "development",
+            DISCORD_TOKEN: process.env.DISCORD_TOKEN
+        },
+        env_production: {
+            NODE_ENV: "production",
+            DISCORD_TOKEN: process.env.DISCORD_TOKEN
+        },
       },
     ],
   };
