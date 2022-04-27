@@ -28,7 +28,7 @@ module.exports = {
                 .setDescription(`${data.description}`)
                 .addFields(
                     { name: 'Level', value: `${data.Level.Index}`},
-                    { name: 'Career Rating', value: `${stats.cr.toLocaleString()}`},
+                    { name: 'Career Rating', value: `${stats.cr.toLocaleString()} CR`},
                     { name: 'Highest WPM', value: `${stats.highestWPM}`},
                     { name: 'Won', value: `${stats.matchesWon.toLocaleString()}`, inline: true},
                     { name: 'Lost', value: `${stats.matchesLost.toLocaleString()}`, inline: true},
