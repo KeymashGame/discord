@@ -24,17 +24,17 @@ module.exports = {
             const userEmbed = new MessageEmbed()
                 .setColor('#FB923C')
                 .setAuthor(`${data.name}#${data.discriminator}`, `${data.avatarSrc}`, `${profileUrl}/${data.name}-${data.discriminator}`)
-                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/png/${ranked.Rank.Rank.toLowerCase()}.png`)
+                .setThumbnail(`https://raw.githubusercontent.com/Keyma-sh/media/main/ranks/png/${(ranked?.Rank?.Rank || 'unrated').toLowerCase()}.svg`)
                 .setDescription(`${data.description}`)
                 .addFields(
-                    { name: 'Rank', value: `${ranked.Rank.Rank}`},
                     { name: 'Level', value: `${data.Level.Index}`},
-                    { name: 'Skillrating', value: `${ranked.Rank.SR}`},
+                    { name: 'Career Rating', value: `${stats.cr}`},
                     { name: 'Highest WPM', value: `${stats.highestWPM}`},
                     { name: 'Won', value: `${stats.matchesWon}`, inline: true},
                     { name: 'Lost', value: `${stats.matchesLost}`, inline: true},
                     { name: 'Quit', value: `${stats.matchesQuit}`, inline: true},
-                    { name: 'Ranked Games', value: `${ranked.Rank.Games}`},
+                    { name: 'Ranked Level', value: `${ranked?.Rank?.Rank || 'Unrated'}`},
+                    { name: 'Ranked Games', value: `${ranked?.Rank?.Games || 0}`},
                     { name: 'Won', value: `${ranked.matchesWon}`, inline: true},
                     { name: 'Lost', value: `${ranked.matchesLost}`, inline: true},
                     { name: 'Quit', value: `${ranked.matchesQuit}`, inline: true},
