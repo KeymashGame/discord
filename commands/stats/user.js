@@ -28,16 +28,13 @@ module.exports = {
                 .setDescription(`${data.description}`)
                 .addFields(
                     { name: 'Level', value: `${data.Level.Index}`},
-                    { name: 'Career Rating', value: `${stats.cr}`},
+                    { name: 'Career Rating', value: `${stats.cr.toLocaleString()}`},
                     { name: 'Highest WPM', value: `${stats.highestWPM}`},
-                    { name: 'Won', value: `${stats.matchesWon}`, inline: true},
-                    { name: 'Lost', value: `${stats.matchesLost}`, inline: true},
-                    { name: 'Quit', value: `${stats.matchesQuit}`, inline: true},
+                    { name: 'Won', value: `${stats.matchesWon.toLocaleString()}`, inline: true},
+                    { name: 'Lost', value: `${stats.matchesLost.toLocaleString()}`, inline: true},
+                    { name: 'Quit', value: `${stats.matchesQuit.toLocaleString()}`, inline: true},
                     { name: 'Ranked Level', value: `${ranked?.Rank?.Rank || 'Unrated'}`},
-                    { name: 'Ranked Games', value: `${ranked?.Rank?.Games || 0}`},
-                    { name: 'Won', value: `${ranked.matchesWon}`, inline: true},
-                    { name: 'Lost', value: `${ranked.matchesLost}`, inline: true},
-                    { name: 'Quit', value: `${ranked.matchesQuit}`, inline: true},
+                    { name: 'Ranked Games', value: `${(ranked?.Rank?.Games || 0).toLocaleString()}`},
                 )
             return message.channel.send({ embed: userEmbed });
         } catch (err) {
