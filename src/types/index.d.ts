@@ -8,11 +8,17 @@ declare namespace Keymash {
     max: number;
   }
 
+  interface Channels {
+    welcome: Discord.Snowflake;
+  }
+
   interface ClientOptions extends Discord.ClientOptions {
     guildID: Discord.Snowflake;
     devID: Discord.Snowflake;
     dev: boolean;
     wpmRoles: WPMRole[];
+    channels: Channels;
+    rules: string[];
   }
 
   interface Command<T extends Discord.ApplicationCommandType = "CHAT_INPUT"> {

@@ -10,6 +10,12 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   public static media = "https://raw.githubusercontent.com/keyma-sh/media/main";
   public static iconURL = `${Client.media}/png/avatar.png`;
   public static siteURL = "www.keymash.io";
+  public static thumbnails = {
+    closedBook:
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/closed-book_1f4d5.png",
+    moneyBag:
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
+  };
   public static glob = promisify(globCB);
   public clientOptions: Keymash.ClientOptions;
   public commands = new Discord.Collection<string, Keymash.Command>();
@@ -211,5 +217,25 @@ export class Client<T extends boolean> extends Discord.Client<T> {
         dispose: true
       })
       .catch(() => undefined);
+  }
+
+  public async getChannel(
+    channel: keyof Keymash.Channels
+  ): Promise<Discord.TextChannel | undefined> {
+    const guild = await this.guild;
+
+    const guildChannel = guild?.channels?.cache.find(
+      (ch) => ch.id === this.clientOptions.channels[channel]
+    );
+
+    if (!guildChannel?.isText()) {
+      return;
+    }
+
+    if (guildChannel.type !== "GUILD_TEXT") {
+      return;
+    }
+
+    return guildChannel;
   }
 }

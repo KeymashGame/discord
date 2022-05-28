@@ -3,5 +3,17 @@
   "devID": "your id here",
   "dev": true,
   "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
-  "wpmRoles": []
+  "wpmRoles": [],
+  "channels": {
+    "welcome": "your welcome channel id here"
+  },
+  "rules": [
+    "Follow all Community Guidelines and Terms of Service provided by Discord.",
+    "Any form of bullying, harassment, hate speech, racism or offensive language is prohibited.",
+    "Content that can be considered Not Safe for Work (NSFW) is NOT allowed under any circumstances.",
+    "Political, Drugs, Gender or any topics that can be trivial and sensitive are not allowed.",
+    "Shitposting must be kept to a bare minimum.",
+    "Spamming is not allowed.",
+    "If we feel that you are too toxic or controversial for our community we can and will ban you at any time."
+  ]
 }
