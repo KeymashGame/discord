@@ -55,7 +55,7 @@ export default {
       author: {
         name: `${info.name}#${info.discriminator}`,
         icon_url: info.avatarSrc,
-        url: `${client.clientOptions.urls.profileUrl}/${info.name}-${info.discriminator}`
+        url: `${client.clientOptions.urls.profile}/${info.name}-${info.discriminator}`
       },
       fields: [
         { name: "Level", value: `${info.Level.Index}` },

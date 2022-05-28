@@ -16,7 +16,7 @@ declare namespace Keymash {
   interface URLs {
     endpoint: string;
     discordEndpoint: string;
-    profileUrl: string;
+    profile: string;
   }
 
   interface ClientOptions extends Discord.ClientOptions {

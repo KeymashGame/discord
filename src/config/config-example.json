@@ -7,7 +7,7 @@
   "urls": {
     "endpoint": "https://api.keymash.io/api/v2",
     "discordEndpoint": "https://api.keymash.io/discord/v2",
-    "profileUrl": "https://keymash.io/profile"
+    "profile": "https://keymash.io/profile"
   },
   "channels": {
     "welcome": "your welcome channel id here",
