@@ -107,3 +107,4 @@ dist
 
 # I don't know why is this here
 package-lock.json
+.vscode
