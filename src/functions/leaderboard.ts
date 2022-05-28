@@ -41,6 +41,16 @@ export function formatLeaderboard(
     ? leaderboard.data
     : leaderboard;
 
+  let longestName = 0;
+
+  for (const entry of leaderboardData) {
+    const player = entry.player[0];
+
+    if (player !== undefined && player.name.length > longestName) {
+      longestName = player.name.length;
+    }
+  }
+
   const leaderboardFormatted = leaderboardData.map((entry, index) => {
     const player = entry.player[0];
 
@@ -50,13 +60,17 @@ export function formatLeaderboard(
       return `${place} - Unknown`;
     }
 
-    const wpmString = `${
-      isTopLeaderboardEntry(entry) ? entry.highestWPM : entry.wpm
-    } wpm`;
+    const wpmString = `${(isTopLeaderboardEntry(entry)
+      ? entry.highestWPM
+      : entry.wpm
+    ).toFixed(2)} wpm`;
 
     const str = `${place} ${player.name}#${player.discriminator}`;
 
-    const spaces = 40 - str.length - wpmString.length - 1;
+    const spaces = Math.max(
+      longestName - str.length - wpmString.length + 20,
+      1
+    );
 
     return str + `${" ".repeat(spaces)}${wpmString}`;
   });
