@@ -5,6 +5,15 @@ export default {
   run: async (client) => {
     console.log("Keymash discord bot is up and running 👍".green);
 
-    client.user.setActivity("/help");
+    client.user.setPresence({
+      status: "online",
+      activities: [
+        {
+          name: "Keymash",
+          type: "PLAYING",
+          url: "https://keymash.io"
+        }
+      ]
+    });
   }
 } as Keymash.Event<"ready">;
