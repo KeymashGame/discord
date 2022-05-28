@@ -7,10 +7,12 @@ export default {
   description: "Updates your WPM roles",
   category: "Roles",
   run: async (interaction, client) => {
+    await interaction.deferReply();
+
     const guild = await client.guild;
 
     if (!guild?.me?.permissions.has("MANAGE_ROLES")) {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Missing Permissions",
@@ -24,7 +26,7 @@ export default {
     }
 
     if (guild === undefined || interaction.guildId !== guild.id) {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -39,7 +41,7 @@ export default {
 
     const discordData = await getDiscordData(client, interaction.user.id).catch(
       () => {
-        interaction.reply({
+        interaction.followUp({
           embeds: [
             client.embed({
               title: "Operation Failed",
@@ -60,7 +62,7 @@ export default {
       discordData.playerId,
       "statistics"
     ).catch(() => {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -80,7 +82,7 @@ export default {
     const wpmRole = await client.getWPMRole(highest);
 
     if (wpmRole === undefined) {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -96,7 +98,7 @@ export default {
     const member = await guild.members.fetch(interaction.user.id);
 
     if (member === undefined) {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -110,7 +112,7 @@ export default {
     }
 
     if (member.roles.cache.has(wpmRole.id)) {
-      interaction.reply({
+      interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -128,7 +130,7 @@ export default {
     const result = await member.roles
       .add(wpmRole, "Adding WPM Role")
       .catch(() => {
-        interaction.reply({
+        interaction.followUp({
           embeds: [
             client.embed({
               title: "Operation Failed",
@@ -145,7 +147,7 @@ export default {
       return;
     }
 
-    interaction.reply({
+    interaction.followUp({
       embeds: [
         client.embed({
           title: "Success! 💫",

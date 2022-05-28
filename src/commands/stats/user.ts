@@ -18,7 +18,8 @@ export default {
     await interaction.deferReply();
 
     const username =
-      interaction.options.getString("username", false) ?? undefined;
+      interaction.options.getString("username", false)?.replace("#", "-") ??
+      undefined;
 
     const discordData =
       username === undefined
