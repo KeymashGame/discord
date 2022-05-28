@@ -25,7 +25,6 @@ export default {
       username
     ).catch((err) => {
       interaction.reply({
-        ephemeral: true,
         embeds: [
           client.embed({
             title: "Operation Failed",
@@ -71,7 +70,6 @@ export default {
 
     if (modalSubmitInteraction === undefined) {
       await interaction.followUp({
-        ephemeral: true,
         content: "You took too long to respond. Cancelling..."
       });
 
@@ -86,7 +84,6 @@ export default {
       code
     ).catch((err) => {
       modalSubmitInteraction.reply({
-        ephemeral: true,
         embeds: [
           client.embed({
             title: "Operation Failed",
