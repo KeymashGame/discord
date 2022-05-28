@@ -65,7 +65,7 @@ declare namespace Keymash {
     cardBorder: string;
   }
 
-  interface LeaderboardEntry {
+  interface RecentLeaderboardEntry {
     _id: string;
     playerId: string;
     matchId: string;
@@ -76,5 +76,17 @@ declare namespace Keymash {
     placement: number;
     created: number;
     player: Player[];
+  }
+
+  interface TopLeaderboardEntry {
+    _id: string;
+    highestWPM: number;
+    player: Player[];
+    placement: number;
+  }
+
+  interface TopLeaderboard {
+    isNextPage: boolean;
+    data: TopLeaderboardEntry[];
   }
 }

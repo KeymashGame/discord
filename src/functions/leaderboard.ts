@@ -5,9 +5,17 @@ import { Keymash } from "../types";
 const medals = ["🥇", "🥈", "🥉"];
 
 export async function fetchLeaderboards(
+  type: "recent",
+  client: Client<true>
+): Promise<Keymash.RecentLeaderboardEntry[]>;
+export async function fetchLeaderboards(
+  type: "statistics",
+  client: Client<true>
+): Promise<Keymash.TopLeaderboard>;
+export async function fetchLeaderboards(
   type: "recent" | "statistics",
   client: Client<true>
-): Promise<Keymash.LeaderboardEntry[]> {
+): Promise<Keymash.RecentLeaderboardEntry[] | Keymash.TopLeaderboard> {
   const params = new URLSearchParams({
     modeId: "1",
     filter: "highestWPM",
@@ -21,17 +29,19 @@ export async function fetchLeaderboards(
     )}`
   );
 
-  console.log(response.statusText);
-
   const json = await response.json();
 
   return json;
 }
 
 export function formatLeaderboard(
-  leaderboard: Keymash.LeaderboardEntry[]
+  leaderboard: Keymash.RecentLeaderboardEntry[] | Keymash.TopLeaderboard
 ): string {
-  const leaderboardFormatted = leaderboard.map((entry, index) => {
+  const leaderboardData = isTopLeaderboard(leaderboard)
+    ? leaderboard.data
+    : leaderboard;
+
+  const leaderboardFormatted = leaderboardData.map((entry, index) => {
     const player = entry.player[0];
 
     const place = medals[index] ?? index + 1;
@@ -40,7 +50,9 @@ export function formatLeaderboard(
       return `${place} - Unknown`;
     }
 
-    const wpmString = `${entry.wpm} wpm`;
+    const wpmString = `${
+      isTopLeaderboardEntry(entry) ? entry.highestWPM : entry.wpm
+    } wpm`;
 
     const str = `${place} ${player.name}#${player.discriminator}`;
 
@@ -50,4 +62,16 @@ export function formatLeaderboard(
   });
 
   return `\`\`\`CoffeeScript\n${leaderboardFormatted.join("\n")}\n\`\`\``;
+}
+
+export function isTopLeaderboard(
+  leaderboard: Keymash.RecentLeaderboardEntry[] | Keymash.TopLeaderboard
+): leaderboard is Keymash.TopLeaderboard {
+  return Object.hasOwn(leaderboard, "data");
+}
+
+export function isTopLeaderboardEntry(
+  entry: Keymash.RecentLeaderboardEntry | Keymash.TopLeaderboardEntry
+): entry is Keymash.TopLeaderboardEntry {
+  return Object.hasOwn(entry, "highestWPM");
 }
