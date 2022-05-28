@@ -6,8 +6,8 @@
   "wpmRoles": [
     {
       "id": "wpm role id",
-      "min": "min wpm",
-      "max": "max wpm"
+      "min": 60,
+      "max": 69
     }
   ],
   "urls": {
