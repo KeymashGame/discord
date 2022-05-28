@@ -6,6 +6,7 @@ import { promisify } from "util";
 import { resolve } from "path";
 
 export class Client<T extends boolean> extends Discord.Client<T> {
+  public static timeoutTime = 60000;
   public static media = "https://raw.githubusercontent.com/keyma-sh/media/main";
   public static iconURL = `${Client.media}/png/avatar.png`;
   public static siteURL = "www.keymash.io";
@@ -194,5 +195,21 @@ export class Client<T extends boolean> extends Discord.Client<T> {
     }
 
     return embed;
+  }
+
+  public async awaitMessageComponent<T extends Discord.MessageComponentType>(
+    channel: Discord.TextBasedChannel | null | undefined,
+    filter: Discord.CollectorFilter<[Discord.MappedInteractionTypes<true>[T]]>,
+    componentType: T,
+    time = Client.timeoutTime
+  ): Promise<Discord.MappedInteractionTypes[T] | undefined> {
+    return channel
+      ?.awaitMessageComponent<T>({
+        componentType,
+        filter,
+        time,
+        dispose: true
+      })
+      .catch(() => undefined);
   }
 }
