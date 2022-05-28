@@ -5,7 +5,7 @@ import { Client } from "../../structures/client";
 export default {
   name: "unlock-commands",
   description: "Unlock commands",
-  category: "Dev",
+  category: "Admin",
   needsPermissions: true,
   run: async (interaction, client) => {
     if (interaction.guild?.ownerId !== interaction.user.id) {

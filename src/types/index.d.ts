@@ -10,6 +10,7 @@ declare namespace Keymash {
 
   interface Channels {
     welcome: Discord.Snowflake;
+    textBugs: Discord.Snowflake;
   }
 
   interface ClientOptions extends Discord.ClientOptions {

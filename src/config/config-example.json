@@ -5,7 +5,8 @@
   "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
   "wpmRoles": [],
   "channels": {
-    "welcome": "your welcome channel id here"
+    "welcome": "your welcome channel id here",
+    "textBugs": "your text bugs channel id here"
   },
   "rules": [
     "Follow all Community Guidelines and Terms of Service provided by Discord.",
