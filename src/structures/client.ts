@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 import _ from "lodash";
 import globCB from "glob";
 import { promisify } from "util";

@@ -1,33 +1,44 @@
-const fetch = require('node-fetch');
-const { URLSearchParams } = require('url');
-const { endpoint } = require('../config.json');
+const fetch = require("node-fetch");
+const { URLSearchParams } = require("url");
+const { endpoint } = require("../config.json");
 
 module.exports = (type) => {
-	return new Promise( (resolve, reject) => {
-		if(type.toLowerCase() !== 'recent' && type.toLowerCase() !== 'statistics')
-			return reject(new Error('Invalid type. Must be either recent or statistics'))
+  return new Promise((resolve, reject) => {
+    if (
+      type.toLowerCase() !== "recent" &&
+      type.toLowerCase() !== "statistics"
+    ) {
+      return reject(
+        new Error("Invalid type. Must be either recent or statistics")
+      );
+    }
 
-		switch (type.toLowerCase()) {
-			default:
-				const params = {
-					modeId: 1,
-					filter: 'highestWPM',
-					startNum: 0,
-					limit: 10
-				}
-				const queryString = decodeURI(new URLSearchParams(params))
-				console.log(`GET ${endpoint}/leaderboards/${type}?${queryString}`.yellow)
-				fetch(`${endpoint}/leaderboards/${type}?${queryString}`)
-					.then(res => res.json())
-					.then( (data) => {
-						if(!data)
-							return reject(new Error('An error has occurred during search.'))
-						if(data && data.error)
-							return reject(new Error(data.error))
-						if(data)
-							return resolve(data)
-					})
-				break;
-		}
-	})
-}
+    switch (type.toLowerCase()) {
+      default:
+        const params = {
+          modeId: 1,
+          filter: "highestWPM",
+          startNum: 0,
+          limit: 10
+        };
+        const queryString = decodeURI(new URLSearchParams(params));
+        console.log(
+          `GET ${endpoint}/leaderboards/${type}?${queryString}`.yellow
+        );
+        fetch(`${endpoint}/leaderboards/${type}?${queryString}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data) {
+              return reject(new Error("An error has occurred during search."));
+            }
+            if (data && data.error) {
+              return reject(new Error(data.error));
+            }
+            if (data) {
+              return resolve(data);
+            }
+          });
+        break;
+    }
+  });
+};

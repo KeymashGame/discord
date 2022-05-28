@@ -4,6 +4,11 @@
   "dev": true,
   "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
   "wpmRoles": [],
+  "urls": {
+    "endpoint": "https://api.keymash.io/api/v2",
+    "discordEndpoint": "https://api.keymash.io/discord/v2",
+    "profileUrl": "https://keymash.io/profile"
+  },
   "channels": {
     "welcome": "your welcome channel id here",
     "textBugs": "your text bugs channel id here"

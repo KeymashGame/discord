@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { Client } from "../structures/client";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 export default {
   event: "interactionCreate",

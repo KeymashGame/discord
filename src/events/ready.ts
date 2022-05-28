@@ -1,4 +1,4 @@
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 export default {
   event: "ready",

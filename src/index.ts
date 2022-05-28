@@ -1,7 +1,7 @@
 import { Client } from "./structures/client";
 import { config } from "dotenv";
 import clientOptions from "./config/config.json";
-import { Keymash } from "./types";
+import type { Keymash } from "./types";
 import "colors";
 
 console.clear();
