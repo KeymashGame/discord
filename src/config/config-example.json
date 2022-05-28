@@ -1,0 +1,7 @@
+{
+  "guildID": "your guild id here",
+  "devID": "your id here",
+  "dev": true,
+  "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
+  "wpmRoles": []
+}
