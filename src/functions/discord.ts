@@ -1,6 +1,34 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import { Client } from "../structures/client";
+import { Keymash } from "../types";
+
+export async function getDiscordData(
+  client: Client<true>,
+  discordID: Discord.Snowflake
+): Promise<Keymash.PlayerDiscordData> {
+  const params = new URLSearchParams({
+    discordId: discordID
+  });
+
+  const response = await fetch(
+    `${client.clientOptions.urls.discordEndpoint}/get?${decodeURI(
+      params.toString()
+    )}`
+  );
+
+  const json = await response.json();
+
+  if (json === undefined) {
+    throw "No JSON returned";
+  }
+
+  if (json.error !== undefined) {
+    throw json.error;
+  }
+
+  return json;
+}
 
 export async function linkDiscord(
   client: Client<true>,
@@ -24,18 +52,18 @@ export async function linkDiscord(
   const json = await response.json();
 
   if (json === undefined) {
-    return Promise.reject("No JSON returned");
+    throw "No JSON returned";
   }
 
   if (json.error !== undefined) {
-    return Promise.reject(json.error);
+    throw json.error;
   }
 
   if (json.success !== undefined) {
     return json.success;
   }
 
-  return Promise.reject("No success or error returned");
+  throw "No success or error returned";
 }
 
 export async function confirmWithCode(
@@ -60,16 +88,16 @@ export async function confirmWithCode(
   const json = await response.json();
 
   if (json === undefined) {
-    return Promise.reject("No JSON returned");
+    throw "No JSON returned";
   }
 
   if (json.error !== undefined) {
-    return Promise.reject(json.error);
+    throw json.error;
   }
 
   if (json.success !== undefined) {
     return json.success;
   }
 
-  return Promise.reject("No success or error returned");
+  throw "No success or error returned";
 }

@@ -219,6 +219,60 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       .catch(() => undefined);
   }
 
+  public async getWPMRole(wpm: number): Promise<Discord.Role | undefined> {
+    const guild = await this.guild;
+
+    if (guild === undefined) {
+      return;
+    }
+
+    const roleID = this.clientOptions.wpmRoles.find(
+      (role) => role.min <= wpm && wpm <= role.max
+    )?.id;
+
+    if (roleID === undefined) {
+      return;
+    }
+
+    return (await guild.roles.fetch(roleID)) ?? undefined;
+  }
+
+  public async removeAllWPMRoles(member: Discord.GuildMember): Promise<void> {
+    const guild = await this.guild;
+
+    if (guild === undefined) {
+      return;
+    }
+
+    const roles = this.clientOptions.wpmRoles.map((role) => role.id);
+
+    const containedRoles = member.roles.cache.filter((role) =>
+      roles.includes(role.id)
+    );
+
+    await member.roles.remove(containedRoles, "Removing WPM Roles");
+  }
+
+  public getUserWPMFromRole(member: Discord.GuildMember): number | undefined {
+    const roles = this.clientOptions.wpmRoles.map((role) => role.id);
+
+    const roleID = member.roles.cache.find((role) =>
+      roles.includes(role.id)
+    )?.id;
+
+    if (roleID === undefined) {
+      return;
+    }
+
+    const role = this.clientOptions.wpmRoles.find((role) => role.id === roleID);
+
+    if (role === undefined) {
+      return;
+    }
+
+    return role.max;
+  }
+
   public async getChannel(
     channel: keyof Keymash.Channels
   ): Promise<Discord.TextChannel | undefined> {

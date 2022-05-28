@@ -21,7 +21,7 @@ export async function fetchLeaderboards(
     filter: "highestWPM",
     startNum: "0",
     limit: "10"
-  }).toString();
+  });
 
   const response = await fetch(
     `${client.clientOptions.urls.endpoint}/leaderboards/${type}?${decodeURI(
