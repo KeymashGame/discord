@@ -1,14 +1,11 @@
-const { prefix } = require('../../config.json')
+const { prefix } = require("../../config.json");
 
-module.exports = async (client,message) => {
-
+module.exports = async (client, message) => {
   // Avoid bot commands
-  if (message.author.bot) 
-    return;
+  if (message.author.bot) return;
 
   // Avoid DM commands
-  if (message.channel.type === "dm") 
-    return;
+  if (message.channel.type === "dm") return;
 
   // Formatting the message into arguments
   let messageArray = message.content.split(" ");
@@ -16,17 +13,14 @@ module.exports = async (client,message) => {
   let args = messageArray.slice(1);
 
   // If a command does not start with the prefix return
-  if (!command.startsWith(prefix)) 
-    return;
+  if (!command.startsWith(prefix)) return;
 
   // Get command
   let cmd = client.commands.get(command.slice(prefix.length));
 
   // If command does not exist, return
-  if (!cmd) 
-    return;
+  if (!cmd) return;
 
   // If command is valid, run it
-  if (cmd) 
-    cmd.run(client, message, args);
-}
+  if (cmd) cmd.run(client, message, args);
+};

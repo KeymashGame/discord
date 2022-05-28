@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton } from "discord.js";
+import * as Discord from "discord.js";
 import type { Keymash } from "../../types";
 import { Client } from "../../structures/client";
 
@@ -37,9 +37,9 @@ export default {
       interaction.user
     );
 
-    const row = new MessageActionRow();
+    const row = new Discord.MessageActionRow();
 
-    const confirmButton = new MessageButton()
+    const confirmButton = new Discord.MessageButton()
       .setCustomId("unlock")
       .setLabel("Unlock Commands")
       .setStyle("DANGER")
