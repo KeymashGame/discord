@@ -6,11 +6,11 @@ module.exports = {
       args: "start",
       env: {
         NODE_ENV: "development",
-        DISCORD_TOKEN: process.env.DISCORD_TOKEN
+        TOKEN: process.env["TOKEN"]
       },
       env_production: {
         NODE_ENV: "production",
-        DISCORD_TOKEN: process.env.DISCORD_TOKEN
+        TOKEN: process.env["TOKEN"]
       }
     }
   ]
