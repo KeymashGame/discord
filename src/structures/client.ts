@@ -6,13 +6,14 @@ import { promisify } from "util";
 import { resolve } from "path";
 
 export class Client<T extends boolean> extends Discord.Client<T> {
-  public static iconURL =
-    "https://cdn.discordapp.com/avatars/719415069460529163/e6a8941e96548eb05ccd5ce9da84e95a.png?size=1024";
+  public static media = "https://raw.githubusercontent.com/keyma-sh/media/main";
+  public static iconURL = `${Client.media}/png/avatar.png`;
   public static siteURL = "www.keymash.io";
   public static glob = promisify(globCB);
   public clientOptions: Keymash.ClientOptions;
   public commands = new Discord.Collection<string, Keymash.Command>();
   public categories: string[] = [];
+  public permissionsAdded = new Set<string>();
 
   public constructor(clientOptions: Keymash.ClientOptions) {
     super(clientOptions);

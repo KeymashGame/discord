@@ -104,7 +104,7 @@ dist
 # TernJS port file
 .tern-port
 
-
-# I don't know why is this here
+# Keymash Bot
+src/config/config.json
 package-lock.json
 .vscode
