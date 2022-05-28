@@ -2,7 +2,7 @@ module.exports = {
     apps: [
       {
         name: 'keymash-discord',
-        script: 'npm',
+        script: 'yarn',
         args: 'start',
         env: {
             NODE_ENV: "development",
