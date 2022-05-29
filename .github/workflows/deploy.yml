@@ -20,7 +20,7 @@ jobs:
         working-directory: ./
 
       - name: Update Config File
-        run: mv config/config-server.json config/config.json
+        run: mv src/config/config-server.json src/config/config.json
         working-directory: ./
 
       - name: Run Discord Bot
