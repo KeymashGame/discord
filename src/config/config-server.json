@@ -1,0 +1,87 @@
+{
+    "guildID": "716885680357244939",
+    "devID": "83888634339528704",
+    "dev": false,
+    "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
+    "wpmRoles": [
+      {
+        "id": "888824916407877682",
+        "min": 0,
+        "max": 19
+      },
+      {
+        "id": "888825078161231922",
+        "min": 20,
+        "max": 39
+      },
+      {
+        "id": "888825131743453196",
+        "min": 40,
+        "max": 59
+      },
+      {
+        "id": "888825179491430430",
+        "min": 60,
+        "max": 79
+      },
+      {
+        "id": "888825209606537276",
+        "min": 80,
+        "max": 99
+      },
+      {
+        "id": "888825243832053831",
+        "min": 100,
+        "max": 119
+      },
+      {
+        "id": "888825275381596182",
+        "min": 120,
+        "max": 139
+      },
+      {
+        "id": "888825298492211260",
+        "min": 140,
+        "max": 159
+      },
+      {
+        "id": "888825338132570242",
+        "min": 160,
+        "max": 179
+      },
+      {
+        "id": "888825380968992788",
+        "min": 180,
+        "max": 199
+      },
+      {
+        "id": "888825412036214864",
+        "min": 200,
+        "max": 999
+      },
+      {
+        "id": "902642691676979211",
+        "min": 250,
+        "max": 999
+      }
+    ],
+    "urls": {
+      "endpoint": "https://api.keymash.io/api/v2",
+      "discordEndpoint": "https://api.keymash.io/discord/v2",
+      "profile": "https://keymash.io/profile"
+    },
+    "channels": {
+      "welcome": "your welcome channel id here",
+      "textBugs": "your text bugs channel id here"
+    },
+    "rules": [
+      "Follow all Community Guidelines and Terms of Service provided by Discord.",
+      "Any form of bullying, harassment, hate speech, racism or offensive language is prohibited.",
+      "Content that can be considered Not Safe for Work (NSFW) is NOT allowed under any circumstances.",
+      "Political, Drugs, Gender or any topics that can be trivial and sensitive are not allowed.",
+      "Shitposting must be kept to a bare minimum.",
+      "Spamming is not allowed.",
+      "If we feel that you are too toxic or controversial for our community we can and will ban you at any time."
+    ]
+  }
+  

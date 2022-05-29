@@ -19,9 +19,13 @@ jobs:
         run: yarn
         working-directory: ./
 
+      - name: Update Config File
+        run: mv config/config-server.json config/config.json
+        working-directory: ./
+
       - name: Run Discord Bot
         run: |
           pm2 startOrRestart ecosystem.config.js --env production
         working-directory: ./
         env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          TOKEN: ${{ secrets.DISCORD_TOKEN }}
