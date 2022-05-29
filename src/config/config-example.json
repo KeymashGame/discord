@@ -2,7 +2,7 @@
   "guildID": "your guild id here",
   "devID": "your id here",
   "dev": true,
-  "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"],
+  "intents": ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
   "wpmRoles": [
     {
       "id": "wpm role id",
