@@ -8,7 +8,7 @@ export default {
   category: "Admin",
   needsPermissions: true,
   run: async (interaction, client) => {
-    if (interaction.guild?.ownerId !== interaction.user.id) {
+    if (interaction.guild?.ownerId !== interaction.user.id && client.clientOptions.devID !== interaction.user.id) {
       interaction.reply("❌ You must be the server owner to run this command.");
 
       return;
