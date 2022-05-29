@@ -60,7 +60,7 @@ export default {
       },
       fields: [
         { name: "Level", value: `${info.Level.Index}` },
-        { name: "Career Rating", value: `${stats.cr.toLocaleString()} CR` },
+        { name: "Career Rating", value: `${stats.cr?.toLocaleString() ?? "No career rating"} CR` },
         { name: "Highest WPM", value: `${stats.highestWPM}` },
         {
           name: "Won",

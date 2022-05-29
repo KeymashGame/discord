@@ -135,7 +135,7 @@ declare namespace Keymash {
     tournamentsWon: number;
     tournamentsTop5: number;
     tournamentsLost: number;
-    cr: number;
+    cr?: number;
   }
 
   interface RecentLeaderboardEntry {
