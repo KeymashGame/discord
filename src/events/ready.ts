@@ -1,4 +1,5 @@
 import type { Keymash } from "../types";
+import * as Discord from "discord.js";
 
 export default {
   event: "ready",
@@ -10,7 +11,7 @@ export default {
       activities: [
         {
           name: "Keymash",
-          type: "PLAYING",
+          type: Discord.ActivityType.Playing,
           url: "https://keymash.io"
         }
       ]

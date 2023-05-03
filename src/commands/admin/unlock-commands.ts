@@ -8,7 +8,10 @@ export default {
   category: "Admin",
   needsPermissions: true,
   run: async (interaction, client) => {
-    if (interaction.guild?.ownerId !== interaction.user.id && client.clientOptions.devID !== interaction.user.id) {
+    if (
+      interaction.guild?.ownerId !== interaction.user.id &&
+      client.clientOptions.devID !== interaction.user.id
+    ) {
       interaction.reply("❌ You must be the server owner to run this command.");
 
       return;
@@ -37,12 +40,12 @@ export default {
       interaction.user
     );
 
-    const row = new Discord.MessageActionRow();
+    const row = new Discord.ActionRowBuilder<Discord.ButtonBuilder>();
 
-    const confirmButton = new Discord.MessageButton()
+    const confirmButton = new Discord.ButtonBuilder()
       .setCustomId("unlock")
       .setLabel("Unlock Commands")
-      .setStyle("DANGER")
+      .setStyle(Discord.ButtonStyle.Danger)
       .setDisabled(false);
 
     row.addComponents(confirmButton);
@@ -60,7 +63,7 @@ export default {
         replyMessage.id === i.message.id &&
         i.user.id === interaction.user.id &&
         ["unlock"].includes(i.customId),
-      "BUTTON",
+      Discord.ComponentType.Button,
       Client.timeoutTime * 15
     );
 

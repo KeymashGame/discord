@@ -6,10 +6,10 @@ export default {
   event: "interactionCreate",
   run: async (client, interaction) => {
     if (
-      interaction.channel?.type !== "DM" &&
+      interaction.channel?.type !== Discord.ChannelType.DM &&
       (interaction.isCommand() ||
-        interaction.isMessageContextMenu() ||
-        interaction.isUserContextMenu())
+        interaction.isMessageContextMenuCommand() ||
+        interaction.isUserContextMenuCommand())
     ) {
       runCommand(interaction, client);
     }
@@ -19,8 +19,8 @@ export default {
 async function runCommand(
   interaction:
     | Discord.CommandInteraction
-    | Discord.MessageContextMenuInteraction
-    | Discord.UserContextMenuInteraction,
+    | Discord.MessageContextMenuCommandInteraction
+    | Discord.UserContextMenuCommandInteraction,
   client: Client<true>
 ): Promise<void> {
   const commandName = interaction.commandName;

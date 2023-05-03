@@ -2,6 +2,14 @@ import * as Discord from "discord.js";
 import { Client } from "../structures/client";
 
 declare namespace Keymash {
+  type ChannelTypes =
+    | Discord.NewsChannel
+    | Discord.StageChannel
+    | Discord.PrivateThreadChannel
+    | Discord.PublicThreadChannel<boolean>
+    | Discord.VoiceChannel
+    | undefined;
+
   interface WPMRole {
     id: Discord.Snowflake;
     min: number;
@@ -29,7 +37,9 @@ declare namespace Keymash {
     rules: string[];
   }
 
-  interface Command<T extends Discord.ApplicationCommandType = "CHAT_INPUT"> {
+  interface Command<
+    T extends Discord.ApplicationCommandType = Discord.ApplicationCommandType.ChatInput
+  > {
     name: string;
     description?: string;
     category: string;
@@ -37,7 +47,7 @@ declare namespace Keymash {
     options?: Discord.ApplicationCommandOption[];
     needsPermissions?: boolean;
     run: (
-      interaction: T extends "CHAT_INPUT"
+      interaction: T extends Discord.ApplicationCommandType.ChatInput
         ? Discord.CommandInteraction
         : T extends "MESSAGE"
         ? Discord.MessageContextMenuInteraction

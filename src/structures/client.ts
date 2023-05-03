@@ -91,17 +91,18 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       const cmd = slashCommands?.find((c) => c.name === command.name);
 
       if (cmd === undefined) {
-        const type = command.type ?? "CHAT_INPUT";
+        const type = command.type ?? Discord.ApplicationCommandType.ChatInput;
 
         const c = await this.application?.commands
           .create(
             {
               name: command.name,
               description:
-                type === "CHAT_INPUT"
+                type === Discord.ApplicationCommandType.ChatInput
                   ? command.description ?? "No description provided"
                   : "",
-              type,
+              // TODO: Probably wrong type, should be T extends ApplicationCommandType
+              type: type as Discord.ApplicationCommandType.ChatInput,
               options: command.options as Discord.ApplicationCommandOptionData[]
             },
             this.clientOptions.guildID
@@ -142,12 +143,12 @@ export class Client<T extends boolean> extends Discord.Client<T> {
           options: cmd.options.map(mapper)
         };
 
-        const type = command.type ?? "CHAT_INPUT";
+        const type = command.type ?? Discord.ApplicationCommandType.ChatInput;
 
         const commandObject = {
           name: command.name,
           description:
-            type === "CHAT_INPUT"
+            type === Discord.ApplicationCommandType.ChatInput
               ? command.description ?? "No description provided"
               : "",
           type,
@@ -175,9 +176,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   }
 
   public embed(
-    embedOptions: Discord.MessageEmbedOptions,
+    embedOptions: Discord.EmbedData,
     user?: Discord.User
-  ): Discord.MessageEmbed {
+  ): Discord.EmbedBuilder {
     embedOptions.footer = {
       text: `${Client.siteURL}${
         embedOptions.footer?.text !== undefined
@@ -190,15 +191,12 @@ export class Client<T extends boolean> extends Discord.Client<T> {
     if (embedOptions.author === undefined && user !== undefined) {
       embedOptions.author = {
         name: user.username,
-        iconURL: user.avatarURL({ dynamic: true }) ?? ""
+        iconURL: user.avatarURL({ forceStatic: false }) ?? ""
       };
     }
 
-    const embed = new Discord.MessageEmbed(embedOptions);
-
-    if (!embed.timestamp) {
-      embed.setTimestamp();
-    }
+    const embed = new Discord.EmbedBuilder(embedOptions);
+    embed.setTimestamp();
 
     return embed;
   }
@@ -275,21 +273,17 @@ export class Client<T extends boolean> extends Discord.Client<T> {
 
   public async getChannel(
     channel: keyof Keymash.Channels
-  ): Promise<Discord.TextChannel | undefined> {
+  ): Promise<Keymash.ChannelTypes> {
     const guild = await this.guild;
 
     const guildChannel = guild?.channels?.cache.find(
       (ch) => ch.id === this.clientOptions.channels[channel]
     );
 
-    if (!guildChannel?.isText()) {
+    if (guildChannel?.type === Discord.ChannelType.GuildText) {
       return;
     }
 
-    if (guildChannel.type !== "GUILD_TEXT") {
-      return;
-    }
-
-    return guildChannel;
+    return guildChannel as Keymash.ChannelTypes;
   }
 }

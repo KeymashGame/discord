@@ -1,3 +1,4 @@
+import * as Discord from "discord.js";
 import { getDiscordData } from "../../functions/discord";
 import { getPlayerFromID } from "../../functions/player";
 import { Keymash } from "../../types";
@@ -11,7 +12,11 @@ export default {
 
     const guild = await client.guild;
 
-    if (!guild?.me?.permissions.has("MANAGE_ROLES")) {
+    if (
+      !guild?.members?.me?.permissions.has(
+        Discord.PermissionFlagsBits.ManageRoles
+      )
+    ) {
       interaction.followUp({
         embeds: [
           client.embed({

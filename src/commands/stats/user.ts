@@ -1,6 +1,7 @@
 import { getDiscordData } from "../../functions/discord";
 import { getPlayerFromID, getPlayerFromUsername } from "../../functions/player";
 import { Keymash } from "../../types";
+import * as Discord from "discord.js";
 
 export default {
   name: "user",
@@ -10,7 +11,7 @@ export default {
     {
       name: "username",
       description: "The username of the player to show stats for",
-      type: "STRING",
+      type: Discord.ApplicationCommandOptionType.String,
       required: false
     }
   ],
@@ -18,8 +19,10 @@ export default {
     await interaction.deferReply();
 
     const username =
-      interaction.options.getString("username", false)?.replace("#", "-") ??
-      undefined;
+      interaction.options
+        .get("username", false)
+        ?.toString()
+        ?.replace("#", "-") ?? undefined;
 
     const discordData =
       username === undefined
@@ -56,11 +59,16 @@ export default {
       author: {
         name: `${info.name}#${info.discriminator}`,
         icon_url: info.avatarSrc,
-        url: encodeURI(`${client.clientOptions.urls.profile}/${info.name}-${info.discriminator}`)
+        url: encodeURI(
+          `${client.clientOptions.urls.profile}/${info.name}-${info.discriminator}`
+        )
       },
       fields: [
         { name: "Level", value: `${info.Level.Index}` },
-        { name: "Career Rating", value: `${stats.cr?.toLocaleString() ?? "No career rating"} CR` },
+        {
+          name: "Career Rating",
+          value: `${stats.cr?.toLocaleString() ?? "No career rating"} CR`
+        },
         { name: "Highest WPM", value: `${stats.highestWPM}` },
         {
           name: "Won",

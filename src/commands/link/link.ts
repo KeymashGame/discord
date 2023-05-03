@@ -10,13 +10,14 @@ export default {
     {
       name: "username",
       description: "Your Keymash username",
-      type: "STRING",
+      type: Discord.ApplicationCommandOptionType.String,
       required: true
     }
   ],
   run: async (interaction, client) => {
     const username = interaction.options
-      .getString("username", true)
+      .get("username", true)
+      .toString()
       .replace("#", "-");
 
     const linkMessage = await linkDiscord(
@@ -41,20 +42,20 @@ export default {
       return;
     }
 
-    const row = new Discord.MessageActionRow<Discord.ModalActionRowComponent>();
+    const row = new Discord.ActionRowBuilder<Discord.TextInputBuilder>();
 
-    const textInput = new Discord.TextInputComponent()
+    const textInput = new Discord.TextInputBuilder()
       .setCustomId("code")
       .setLabel("Enter the code from Keymash")
       .setPlaceholder("Code")
       .setRequired(true)
       .setMinLength(6)
       .setMaxLength(6)
-      .setStyle("SHORT");
+      .setStyle(Discord.TextInputStyle.Short);
 
     row.addComponents(textInput);
 
-    const modal = new Discord.Modal()
+    const modal = new Discord.ModalBuilder()
       .setCustomId("link-modal")
       .setTitle("Link Discord")
       .addComponents(row);
