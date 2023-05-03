@@ -1,4 +1,3 @@
-import * as Discord from "discord.js";
 import { Client } from "./structures/client";
 import { config } from "dotenv";
 import clientOptions from "./config/config.json";
@@ -16,9 +15,7 @@ if (process.env["TOKEN"] === undefined) {
 const client = new Client({
   ...clientOptions as Keymash.ClientOptions,
   intents: [
-    Discord.GatewayIntentBits.Guilds,
-    Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.GuildMembers
+    1, 2, 512
   ]
 });
 
