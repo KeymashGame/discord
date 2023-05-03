@@ -157,7 +157,7 @@ export default {
         client.embed({
           title: "Success! 💫",
           description: `You now have the ${wpmRole.name} role.`,
-          color: "RANDOM"
+          color: Discord.Colors.Blue
         })
       ]
     });

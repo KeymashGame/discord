@@ -1,3 +1,4 @@
+import * as Discord from "discord.js";
 import {
   fetchLeaderboards,
   formatLeaderboard
@@ -16,7 +17,7 @@ export default {
     const embed = client.embed({
       title: "Keymash Recent High Scores",
       description: leaderboardFormatted,
-      color: "RANDOM"
+      color: Discord.Colors.Blue
     });
 
     interaction.reply({ embeds: [embed] });

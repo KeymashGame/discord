@@ -58,7 +58,7 @@ export default {
       color: 0xfb923c,
       author: {
         name: `${info.name}#${info.discriminator}`,
-        icon_url: info.avatarSrc,
+        iconURL: info.avatarSrc,
         url: encodeURI(
           `${client.clientOptions.urls.profile}/${info.name}-${info.discriminator}`
         )
