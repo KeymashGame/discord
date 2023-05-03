@@ -1,2 +1,2 @@
 # discord
-Official Discord bot for Discord
+Official Discord bot for Discord.
