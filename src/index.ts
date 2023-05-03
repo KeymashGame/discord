@@ -19,4 +19,6 @@ const client = new Client({
   ]
 });
 
+console.log(process.env["TOKEN"]);
+
 client.start(process.env["TOKEN"]).then(console.log);
