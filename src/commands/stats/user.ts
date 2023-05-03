@@ -21,6 +21,7 @@ export default {
     const username =
       interaction.options
         .get("username", false)
+        ?.value
         ?.toString()
         ?.replace("#", "-") ?? undefined;
 
@@ -43,15 +44,16 @@ export default {
       return;
     }
 
+    console.log(username);
     const info =
       username === undefined
         ? await getPlayerFromID(client, discordData!.playerId, "info")
         : await getPlayerFromUsername(client, username, "info");
 
-    const [ranked, stats] = await Promise.all([
-      getPlayerFromID(client, info.playerId, "ranked"),
+    const [stats] = await Promise.all([
+      // getPlayerFromID(client, info.playerId, "ranked"),
       getPlayerFromID(client, info.playerId, "statistics")
-    ]);
+    ])
 
     const embed = client.embed({
       description: info.description,
@@ -85,11 +87,12 @@ export default {
           value: `${stats.matchesQuit.toLocaleString()}`,
           inline: true
         },
+        /*
         { name: "Ranked Level", value: `${ranked?.Rank?.Rank || "Unrated"}` },
         {
           name: "Ranked Games",
           value: `${(ranked?.Rank?.Games || 0).toLocaleString()}`
-        }
+        }*/
       ]
     });
 

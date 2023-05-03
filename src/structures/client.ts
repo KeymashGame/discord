@@ -4,6 +4,7 @@ import _ from "lodash";
 import globCB from "glob";
 import { promisify } from "util";
 import { resolve } from "path";
+import process from "process";
 
 export class Client<T extends boolean> extends Discord.Client<T> {
   public static timeoutTime = 60000;
@@ -46,11 +47,15 @@ export class Client<T extends boolean> extends Discord.Client<T> {
 
   public async load(): Promise<[number, number]> {
     const commandFiles = await Client.glob(
-      resolve(__dirname, "../", "commands", "**", "*.{ts,js}")
+      process.platform === "win32"
+        ? resolve(__dirname, "..\\", "commands", "**", "*.{ts,js}").replace(/\\/g,'/')
+        : resolve(__dirname, "../", "commands", "**", "*.{ts,js}")
     );
 
     const eventFiles = await Client.glob(
-      resolve(__dirname, "../", "events", "**", "*.{ts,js}")
+      process.platform === "win32"
+        ? resolve(__dirname, "..\\", "events", "**", "*.{ts,js}").replace(/\\/g,'/')
+        : resolve(__dirname, "../", "events", "**", "*.{ts,js}")
     );
 
     const commands = (await Promise.all(
