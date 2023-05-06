@@ -201,19 +201,20 @@ export class Client<T extends boolean> extends Discord.Client<T> {
     embedOptions: Discord.EmbedData,
     user?: Discord.User
   ): Discord.EmbedBuilder {
+    const footerText =
+      embedOptions.footer?.text !== undefined
+        ? ` | ${embedOptions.footer.text}`
+        : "";
+
     embedOptions.footer = {
-      text: `${Client.siteURL}${
-        embedOptions.footer?.text !== undefined
-          ? ` | ${embedOptions.footer.text}`
-          : ""
-      }`,
+      text: `${Client.siteURL}${footerText}`,
       iconURL: Client.iconURL
     };
 
     if (embedOptions.author === undefined && user !== undefined) {
       embedOptions.author = {
         name: user.username,
-        iconURL: user.avatarURL({ forceStatic: false }) ?? ""
+        iconURL: user.avatarURL() ?? undefined
       };
     }
 
