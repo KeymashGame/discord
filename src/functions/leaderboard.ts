@@ -53,25 +53,24 @@ export function formatLeaderboard(
   const leaderboardFormatted = leaderboardData.map((entry, index) => {
     const player = entry.player[0];
 
-    const place = medals[index] ?? index + 1;
+    const place = medals[index] ?? (index + 1).toString();
 
     if (player === undefined) {
       return `${place} - Unknown`;
     }
 
-    const wpmString = `${(isTopLeaderboardEntry(entry)
-      ? entry.highestWPM
-      : entry.wpm
-    ).toFixed(2)} wpm`;
+    const wpm = isTopLeaderboardEntry(entry) ? entry.highestWPM : entry.wpm;
 
-    const str = `${place} ${player.name}#${player.discriminator}`;
+    const wpmString = `${wpm.toFixed(2)} wpm`;
+
+    const string = `${place} ${player.name}#${player.discriminator}`;
 
     const spaces = Math.max(
-      longestName - str.length - wpmString.length + 20,
+      longestName - string.length - wpmString.length + 20,
       1
     );
 
-    return str + `${" ".repeat(spaces)}${wpmString}`;
+    return string + `${" ".repeat(spaces)}${wpmString}`;
   });
 
   return `\`\`\`CoffeeScript\n${leaderboardFormatted.join("\n")}\n\`\`\``;
