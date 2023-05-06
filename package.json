@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Official Discord bot for Keymash",
   "main": "dist/index.js",
+  "engines": {
+    "node": "18.16.0",
+    "yarn": "1.22.19"
+  },
+  "engineStrict": true,
   "scripts": {
     "build": "tsc",
     "run": "node .",
