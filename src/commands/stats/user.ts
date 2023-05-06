@@ -18,18 +18,17 @@ export default {
   run: async (interaction, client) => {
     await interaction.deferReply();
 
-    const username =
-      interaction.options
-        .get("username", false)
-        ?.value?.toString()
-        ?.replace("#", "-") ?? undefined;
+    const username = interaction.options
+      .get("username", false)
+      ?.value?.toString()
+      ?.replace("#", "-");
 
     const discordData =
       username === undefined
         ? await getDiscordData(client, interaction.user.id)
         : undefined;
 
-    if (username === undefined && discordData === undefined) {
+    if (username === undefined || discordData === undefined) {
       interaction.followUp({
         embeds: [
           client.embed({
@@ -46,7 +45,7 @@ export default {
     console.log(username);
     const info =
       username === undefined
-        ? await getPlayerFromID(client, discordData!.playerId, "info")
+        ? await getPlayerFromID(client, discordData.playerId, "info")
         : await getPlayerFromUsername(client, username, "info");
 
     const [stats] = await Promise.all([
