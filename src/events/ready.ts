@@ -1,5 +1,5 @@
-import type { Keymash } from "../types";
 import * as Discord from "discord.js";
+import type { Keymash } from "../types";
 
 export default {
   event: "ready",
