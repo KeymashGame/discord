@@ -33,18 +33,6 @@ async function runCommand(
     return;
   }
 
-  if (
-    !client.clientOptions.dev &&
-    !client.permissionsAdded.has(interaction.guild?.id ?? "") &&
-    command.name !== "unlock-commands"
-  ) {
-    interaction.reply(
-      `❌ Commands have not been unlocked for this server.\nServer owner must run /unlock-commands to unlock commands`
-    );
-
-    return;
-  }
-
   console.log(`Running command "${command.name}"`);
 
   try {
