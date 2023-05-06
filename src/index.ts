@@ -1,6 +1,6 @@
 import "colors";
 import { config } from "dotenv";
-import clientOptions from "./config/config.json";
+import clientOptions from "./config/config.json" assert { type: "json" };
 import { Client } from "./structures/client";
 import type { Keymash } from "./types";
 
