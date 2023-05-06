@@ -15,9 +15,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   public static siteURL = "www.keymash.io";
   public static thumbnails = {
     closedBook:
-      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/closed-book_1f4d5.png",
-    moneyBag:
-      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/closed-book_1f4d5.png"
+    // moneyBag:
+    // "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
   };
   public clientOptions: Keymash.ClientOptions;
   public commands = new Discord.Collection<
