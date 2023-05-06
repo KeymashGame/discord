@@ -3,7 +3,7 @@ import {
   fetchLeaderboards,
   formatLeaderboard
 } from "../../functions/leaderboard";
-import { Keymash } from "../../types";
+import type { Keymash } from "../../types";
 
 export default {
   name: "top",

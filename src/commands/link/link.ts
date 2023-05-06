@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { confirmWithCode, linkDiscord } from "../../functions/discord";
-import { Keymash } from "../../types";
+import type { Keymash } from "../../types";
 
 export default {
   name: "link",

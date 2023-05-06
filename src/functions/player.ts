@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { Client } from "../structures/client";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 type GetPlayerType = "ranked" | "statistics" | "info";
 

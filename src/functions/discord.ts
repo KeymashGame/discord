@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import fetch from "node-fetch";
 import { Client } from "../structures/client";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 export async function getDiscordData(
   client: Client<true>,
