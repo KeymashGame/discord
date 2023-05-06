@@ -15,11 +15,11 @@ export default {
     }
   ],
   run: async (interaction, client) => {
-    const username = interaction.options
-      .get("username", true)
-      ?.value
-      ?.toString()
-      ?.replace("#", "-") ?? '';
+    const username =
+      interaction.options
+        .get("username", true)
+        ?.value?.toString()
+        ?.replace("#", "-") ?? "";
 
     const linkMessage = await linkDiscord(
       client,

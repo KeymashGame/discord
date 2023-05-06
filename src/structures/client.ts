@@ -48,13 +48,19 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   public async load(): Promise<[number, number]> {
     const commandFiles = await Client.glob(
       process.platform === "win32"
-        ? resolve(__dirname, "..\\", "commands", "**", "*.{ts,js}").replace(/\\/g,'/')
+        ? resolve(__dirname, "..\\", "commands", "**", "*.{ts,js}").replace(
+            /\\/g,
+            "/"
+          )
         : resolve(__dirname, "../", "commands", "**", "*.{ts,js}")
     );
 
     const eventFiles = await Client.glob(
       process.platform === "win32"
-        ? resolve(__dirname, "..\\", "events", "**", "*.{ts,js}").replace(/\\/g,'/')
+        ? resolve(__dirname, "..\\", "events", "**", "*.{ts,js}").replace(
+            /\\/g,
+            "/"
+          )
         : resolve(__dirname, "../", "events", "**", "*.{ts,js}")
     );
 

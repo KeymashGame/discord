@@ -21,8 +21,7 @@ export default {
     const username =
       interaction.options
         .get("username", false)
-        ?.value
-        ?.toString()
+        ?.value?.toString()
         ?.replace("#", "-") ?? undefined;
 
     const discordData =
@@ -53,7 +52,7 @@ export default {
     const [stats] = await Promise.all([
       // getPlayerFromID(client, info.playerId, "ranked"),
       getPlayerFromID(client, info.playerId, "statistics")
-    ])
+    ]);
 
     const embed = client.embed({
       description: info.description,
@@ -86,7 +85,7 @@ export default {
           name: "Quit",
           value: `${stats.matchesQuit.toLocaleString()}`,
           inline: true
-        },
+        }
         /*
         { name: "Ranked Level", value: `${ranked?.Rank?.Rank || "Unrated"}` },
         {
