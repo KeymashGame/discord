@@ -1,3 +1,4 @@
+import { PermissionFlagsBits } from "discord.js";
 import { Client } from "../../structures/client";
 import type { Keymash } from "../../types";
 
@@ -5,7 +6,7 @@ export default {
   name: "welcome",
   description: "Sends embeds in the welcome channel",
   category: "Admin",
-  needsPermissions: true,
+  defaultPermissions: [PermissionFlagsBits.ManageGuild],
   run: async (interaction, client) => {
     const channel = await client.getChannel("welcome");
 

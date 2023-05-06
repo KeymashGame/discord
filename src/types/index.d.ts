@@ -37,7 +37,7 @@ declare namespace Keymash {
     category: string;
     type?: T;
     options?: Discord.ApplicationCommandOption[];
-    needsPermissions?: boolean;
+    defaultPermissions?: Discord.PermissionResolvable[];
     run: (
       interaction: T extends Discord.ApplicationCommandType.ChatInput
         ? Discord.CommandInteraction

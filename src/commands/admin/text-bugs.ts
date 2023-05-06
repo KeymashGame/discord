@@ -1,10 +1,11 @@
+import { PermissionFlagsBits } from "discord.js";
 import type { Keymash } from "../../types";
 
 export default {
   name: "text-bugs",
   description: "Sends instructions in the text-bugs channel",
   category: "Admin",
-  needsPermissions: true,
+  defaultPermissions: [PermissionFlagsBits.ManageGuild],
   run: async (interaction, client) => {
     const channel = await client.getChannel("textBugs");
 

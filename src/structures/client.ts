@@ -112,6 +112,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
                   ? command.description ?? "No description provided"
                   : "",
               type,
+              defaultMemberPermissions: new Discord.PermissionsBitField(
+                command.defaultPermissions ?? []
+              ),
               options: command.options as Discord.ApplicationCommandOptionData[]
             },
             this.clientOptions.guildID
@@ -148,6 +151,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
           name: cmd.name,
           description: cmd.description,
           type: cmd.type,
+          defaultMemberPermissions: new Discord.PermissionsBitField(
+            cmd.defaultMemberPermissions ?? []
+          ),
           options: cmd.options.map(mapper)
         };
 
@@ -160,6 +166,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
               ? command.description ?? "No description provided"
               : "",
           type,
+          defaultMemberPermissions: new Discord.PermissionsBitField(
+            command.defaultPermissions ?? []
+          ),
           options: (command.options ?? []).map(mapper)
         };
 
