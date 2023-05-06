@@ -2,14 +2,6 @@ import * as Discord from "discord.js";
 import { Client } from "../structures/client";
 
 declare namespace Keymash {
-  type ChannelTypes =
-    | Discord.NewsChannel
-    | Discord.StageChannel
-    | Discord.PrivateThreadChannel
-    | Discord.PublicThreadChannel<boolean>
-    | Discord.VoiceChannel
-    | undefined;
-
   interface WPMRole {
     id: Discord.Snowflake;
     min: number;
@@ -49,7 +41,7 @@ declare namespace Keymash {
     run: (
       interaction: T extends Discord.ApplicationCommandType.ChatInput
         ? Discord.CommandInteraction
-        : T extends "MESSAGE"
+        : T extends Discord.ApplicationCommandType.Message
         ? Discord.MessageContextMenuInteraction
         : Discord.UserContextMenuInteraction,
       client: Client<true>

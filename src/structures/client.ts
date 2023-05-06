@@ -281,7 +281,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
 
   public async getChannel(
     channel: keyof Keymash.Channels
-  ): Promise<Keymash.ChannelTypes> {
+  ): Promise<Discord.GuildBasedChannel | undefined> {
     const guild = await this.guild;
 
     const guildChannel = guild?.channels?.cache.find(
@@ -292,6 +292,6 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       return;
     }
 
-    return guildChannel as Keymash.ChannelTypes;
+    return guildChannel;
   }
 }
