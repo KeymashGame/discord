@@ -42,7 +42,6 @@ export default {
       return;
     }
 
-    console.log(username);
     const info =
       username === undefined
         ? await getPlayerFromID(client, discordData.playerId, "info")
