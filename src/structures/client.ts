@@ -281,14 +281,14 @@ export class Client<T extends boolean> extends Discord.Client<T> {
 
   public async getChannel(
     channel: keyof Keymash.Channels
-  ): Promise<Discord.GuildBasedChannel | undefined> {
+  ): Promise<Discord.TextBasedChannel | undefined> {
     const guild = await this.guild;
 
     const guildChannel = guild?.channels?.cache.find(
       (ch) => ch.id === this.clientOptions.channels[channel]
     );
 
-    if (guildChannel?.type === Discord.ChannelType.GuildText) {
+    if (!guildChannel?.isTextBased()) {
       return;
     }
 
