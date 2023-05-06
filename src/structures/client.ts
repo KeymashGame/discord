@@ -1,9 +1,8 @@
 import * as Discord from "discord.js";
-import globCB from "glob";
-import _ from "lodash";
+import { glob } from "glob";
+import isEqual from "lodash/isEqual";
 import { resolve } from "path";
 import process from "process";
-import { promisify } from "util";
 import type { Keymash } from "../types";
 
 export class Client<T extends boolean> extends Discord.Client<T> {
@@ -17,7 +16,6 @@ export class Client<T extends boolean> extends Discord.Client<T> {
     moneyBag:
       "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
   };
-  public static glob = promisify(globCB);
   public clientOptions: Keymash.ClientOptions;
   public commands = new Discord.Collection<string, Keymash.Command>();
   public categories: string[] = [];
@@ -46,7 +44,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   }
 
   public async load(): Promise<[number, number]> {
-    const commandFiles = await Client.glob(
+    const commandFiles = await glob(
       process.platform === "win32"
         ? resolve(__dirname, "..\\", "commands", "**", "*.{ts,js}").replace(
             /\\/g,
@@ -55,7 +53,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
         : resolve(__dirname, "../", "commands", "**", "*.{ts,js}")
     );
 
-    const eventFiles = await Client.glob(
+    const eventFiles = await glob(
       process.platform === "win32"
         ? resolve(__dirname, "..\\", "events", "**", "*.{ts,js}").replace(
             /\\/g,
@@ -129,16 +127,15 @@ export class Client<T extends boolean> extends Discord.Client<T> {
         const mapper = (
           option: Discord.ApplicationCommandOption
         ): Discord.ApplicationCommandOption => {
-          type Keys = keyof typeof option;
-
-          type Values = typeof option[Keys];
-
+          type Option = typeof option;
+          type Keys = keyof Option;
+          type Values = Option[Keys];
           type Entries = [Keys, Values];
 
           for (const [key, value] of Object.entries(option) as Entries[]) {
             if (
               value === undefined ||
-              (_.isArray(value) && value.length === 0)
+              (Array.isArray(value) && value.length === 0)
             ) {
               delete option[key];
             }
@@ -166,7 +163,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
           options: (command.options ?? []).map(mapper)
         };
 
-        if (_.isEqual(cmdObject, commandObject)) {
+        if (isEqual(cmdObject, commandObject)) {
           continue;
         }
 

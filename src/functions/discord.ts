@@ -1,5 +1,4 @@
 import * as Discord from "discord.js";
-import fetch from "node-fetch";
 import { Client } from "../structures/client";
 import type { Keymash } from "../types";
 
