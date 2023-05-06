@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { getDiscordData } from "../../functions/discord";
-import { getPlayerFromID, getPlayerFromUsername } from "../../functions/player";
 import type { Keymash } from "../../types";
+import { getDiscordData } from "../../utils/discord";
+import { getPlayerFromID, getPlayerFromUsername } from "../../utils/player";
 
 export default {
   name: "user",
