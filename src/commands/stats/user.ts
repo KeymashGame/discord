@@ -63,7 +63,6 @@ export default {
 
         return info;
       } else {
-        console.log(username);
         const info = await getPlayerFromUsername(client, username, "info");
 
         if (info === undefined) {
