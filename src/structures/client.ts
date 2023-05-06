@@ -1,9 +1,12 @@
 import * as Discord from "discord.js";
 import { glob } from "glob";
 import isEqual from "lodash/isEqual";
-import { resolve } from "path";
+import { dirname, resolve } from "path";
 import process from "process";
+import { fileURLToPath } from "url";
 import type { Keymash } from "../types";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export class Client<T extends boolean> extends Discord.Client<T> {
   public static timeoutTime = 60000;
@@ -17,9 +20,11 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
   };
   public clientOptions: Keymash.ClientOptions;
-  public commands = new Discord.Collection<string, Keymash.Command>();
+  public commands = new Discord.Collection<
+    string,
+    Keymash.Command<Discord.ApplicationCommandType>
+  >();
   public categories: string[] = [];
-  public permissionsAdded = new Set<string>();
 
   public constructor(clientOptions: Keymash.ClientOptions) {
     super(clientOptions);

@@ -40,10 +40,10 @@ declare namespace Keymash {
     defaultPermissions?: Discord.PermissionResolvable[];
     run: (
       interaction: T extends Discord.ApplicationCommandType.ChatInput
-        ? Discord.CommandInteraction
+        ? Discord.ChatInputCommandInteraction
         : T extends Discord.ApplicationCommandType.Message
-        ? Discord.MessageContextMenuInteraction
-        : Discord.UserContextMenuInteraction,
+        ? Discord.MessageContextMenuCommandInteraction
+        : Discord.UserContextMenuCommandInteraction,
       client: Client<true>
     ) => void;
   }
