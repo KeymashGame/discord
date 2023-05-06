@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
-import type { Keymash } from "../types";
-import _ from "lodash";
 import globCB from "glob";
-import { promisify } from "util";
+import _ from "lodash";
 import { resolve } from "path";
 import process from "process";
+import { promisify } from "util";
+import type { Keymash } from "../types";
 
 export class Client<T extends boolean> extends Discord.Client<T> {
   public static timeoutTime = 60000;
