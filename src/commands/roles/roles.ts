@@ -44,21 +44,19 @@ export default {
       return;
     }
 
-    const discordData = await getDiscordData(client, interaction.user.id).catch(
-      () => {
-        interaction.followUp({
-          embeds: [
-            client.embed({
-              title: "Operation Failed",
-              description: "Please link your account with /link.",
-              color: 0xff0000
-            })
-          ]
-        });
-      }
-    );
+    const discordData = await getDiscordData(client, interaction.user.id);
 
     if (discordData === undefined) {
+      interaction.followUp({
+        embeds: [
+          client.embed({
+            title: "Operation Failed",
+            description: "Please link your account with /link.",
+            color: 0xff0000
+          })
+        ]
+      });
+
       return;
     }
 
@@ -66,7 +64,9 @@ export default {
       client,
       discordData.playerId,
       "statistics"
-    ).catch(() => {
+    );
+
+    if (stats === undefined) {
       interaction.followUp({
         embeds: [
           client.embed({
@@ -76,9 +76,7 @@ export default {
           })
         ]
       });
-    });
 
-    if (stats === undefined) {
       return;
     }
 
@@ -134,21 +132,19 @@ export default {
 
     const result = await member.roles
       .add(wpmRole, "Adding WPM Role")
-      .catch(() => {
-        interaction.followUp({
-          embeds: [
-            client.embed({
-              title: "Operation Failed",
-              description: "Could not add the WPM role.",
-              color: 0xff0000
-            })
-          ]
-        });
-
-        return undefined;
-      });
+      .catch(() => undefined);
 
     if (result === undefined) {
+      interaction.followUp({
+        embeds: [
+          client.embed({
+            title: "Operation Failed",
+            description: "Could not add the WPM role.",
+            color: 0xff0000
+          })
+        ]
+      });
+
       return;
     }
 
