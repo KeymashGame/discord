@@ -102,7 +102,8 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       const cmd = slashCommands?.find((c) => c.name === command.name);
 
       if (cmd === undefined) {
-        const type = command.type ?? Discord.ApplicationCommandType.ChatInput;
+        const type: Discord.ApplicationCommandType =
+          command.type ?? Discord.ApplicationCommandType.ChatInput;
 
         const c = await this.application?.commands
           .create(
@@ -112,8 +113,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
                 type === Discord.ApplicationCommandType.ChatInput
                   ? command.description ?? "No description provided"
                   : "",
-              // TODO: Probably wrong type, should be T extends ApplicationCommandType
-              type: type as Discord.ApplicationCommandType.ChatInput,
+              type,
               options: command.options as Discord.ApplicationCommandOptionData[]
             },
             this.clientOptions.guildID
