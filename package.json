@@ -10,7 +10,7 @@
   "engineStrict": true,
   "scripts": {
     "build": "tsc",
-    "run": "node --experimental-specifier-resolution=node src --enable-source-maps",
+    "run": "node --experimental-specifier-resolution=node dist/index.js --enable-source-maps",
     "start": "yarn build && yarn run run",
     "dev": "nodemon",
     "pretty": "prettier 'src/**/*.ts'",
