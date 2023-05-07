@@ -1,6 +1,5 @@
-import fetch from "node-fetch";
 import { Client } from "../structures/client";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 type GetPlayerType = "ranked" | "statistics" | "info";
 
@@ -16,7 +15,7 @@ export async function getPlayerFromID<T extends GetPlayerType>(
   client: Client<true>,
   playerID: string,
   type: T
-): Promise<GetPlayerData<T>> {
+): Promise<GetPlayerData<T> | undefined> {
   const params = new URLSearchParams({
     playerId: playerID,
     worldId: "0"
@@ -28,14 +27,18 @@ export async function getPlayerFromID<T extends GetPlayerType>(
     )}`
   );
 
+  if (!response.ok) {
+    return;
+  }
+
   const json = await response.json();
 
   if (json === undefined) {
-    throw "No JSON returned";
+    return;
   }
 
   if (json.error !== undefined) {
-    throw json.error;
+    return;
   }
 
   return json;
@@ -45,7 +48,7 @@ export async function getPlayerFromUsername<T extends GetPlayerType>(
   client: Client<true>,
   username: string,
   type: T
-): Promise<GetPlayerData<T>> {
+): Promise<GetPlayerData<T> | undefined> {
   const params = new URLSearchParams({
     name: username,
     worldId: "0"
@@ -57,14 +60,18 @@ export async function getPlayerFromUsername<T extends GetPlayerType>(
     )}`
   );
 
+  if (!response.ok) {
+    return;
+  }
+
   const json = await response.json();
 
   if (json === undefined) {
-    throw "No JSON returned";
+    return;
   }
 
   if (json.error !== undefined) {
-    throw json.error;
+    return;
   }
 
   return json;

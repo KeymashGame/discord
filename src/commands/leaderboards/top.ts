@@ -1,9 +1,6 @@
 import * as Discord from "discord.js";
-import {
-  fetchLeaderboards,
-  formatLeaderboard
-} from "../../functions/leaderboard";
-import { Keymash } from "../../types";
+import type { Keymash } from "../../types";
+import { fetchLeaderboards, formatLeaderboard } from "../../utils/leaderboard";
 
 export default {
   name: "top",

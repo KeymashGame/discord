@@ -1,12 +1,11 @@
 import * as Discord from "discord.js";
-import fetch from "node-fetch";
 import { Client } from "../structures/client";
-import { Keymash } from "../types";
+import type { Keymash } from "../types";
 
 export async function getDiscordData(
   client: Client<true>,
   discordID: Discord.Snowflake
-): Promise<Keymash.PlayerDiscordData> {
+): Promise<Keymash.PlayerDiscordData | undefined> {
   const params = new URLSearchParams({
     discordId: discordID
   });
@@ -17,14 +16,18 @@ export async function getDiscordData(
     )}`
   );
 
+  if (!response.ok) {
+    return;
+  }
+
   const json = await response.json();
 
   if (json === undefined) {
-    throw "No JSON returned";
+    return;
   }
 
   if (json.error !== undefined) {
-    throw json.error;
+    return;
   }
 
   return json;

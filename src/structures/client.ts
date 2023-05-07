@@ -1,10 +1,12 @@
 import * as Discord from "discord.js";
-import globCB from "glob";
-import _ from "lodash";
-import { resolve } from "path";
+import { glob } from "glob";
+import isEqual from "lodash/isEqual";
+import { dirname, resolve } from "path";
 import process from "process";
-import { promisify } from "util";
+import { fileURLToPath } from "url";
 import type { Keymash } from "../types";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export class Client<T extends boolean> extends Discord.Client<T> {
   public static timeoutTime = 60000;
@@ -13,15 +15,16 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   public static siteURL = "www.keymash.io";
   public static thumbnails = {
     closedBook:
-      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/closed-book_1f4d5.png",
-    moneyBag:
-      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
+      "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/closed-book_1f4d5.png"
+    // moneyBag:
+    // "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/twitter/282/money-bag_1f4b0.png"
   };
-  public static glob = promisify(globCB);
   public clientOptions: Keymash.ClientOptions;
-  public commands = new Discord.Collection<string, Keymash.Command>();
+  public commands = new Discord.Collection<
+    string,
+    Keymash.Command<Discord.ApplicationCommandType>
+  >();
   public categories: string[] = [];
-  public permissionsAdded = new Set<string>();
 
   public constructor(clientOptions: Keymash.ClientOptions) {
     super(clientOptions);
@@ -46,7 +49,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
   }
 
   public async load(): Promise<[number, number]> {
-    const commandFiles = await Client.glob(
+    const commandFiles = await glob(
       process.platform === "win32"
         ? resolve(__dirname, "..\\", "commands", "**", "*.{ts,js}").replace(
             /\\/g,
@@ -55,7 +58,7 @@ export class Client<T extends boolean> extends Discord.Client<T> {
         : resolve(__dirname, "../", "commands", "**", "*.{ts,js}")
     );
 
-    const eventFiles = await Client.glob(
+    const eventFiles = await glob(
       process.platform === "win32"
         ? resolve(__dirname, "..\\", "events", "**", "*.{ts,js}").replace(
             /\\/g,
@@ -102,7 +105,8 @@ export class Client<T extends boolean> extends Discord.Client<T> {
       const cmd = slashCommands?.find((c) => c.name === command.name);
 
       if (cmd === undefined) {
-        const type = command.type ?? Discord.ApplicationCommandType.ChatInput;
+        const type: Discord.ApplicationCommandType =
+          command.type ?? Discord.ApplicationCommandType.ChatInput;
 
         const c = await this.application?.commands
           .create(
@@ -112,8 +116,10 @@ export class Client<T extends boolean> extends Discord.Client<T> {
                 type === Discord.ApplicationCommandType.ChatInput
                   ? command.description ?? "No description provided"
                   : "",
-              // TODO: Probably wrong type, should be T extends ApplicationCommandType
-              type: type as Discord.ApplicationCommandType.ChatInput,
+              type,
+              defaultMemberPermissions: new Discord.PermissionsBitField(
+                command.defaultPermissions ?? []
+              ),
               options: command.options as Discord.ApplicationCommandOptionData[]
             },
             this.clientOptions.guildID
@@ -129,16 +135,15 @@ export class Client<T extends boolean> extends Discord.Client<T> {
         const mapper = (
           option: Discord.ApplicationCommandOption
         ): Discord.ApplicationCommandOption => {
-          type Keys = keyof typeof option;
-
-          type Values = typeof option[Keys];
-
+          type Option = typeof option;
+          type Keys = keyof Option;
+          type Values = Option[Keys];
           type Entries = [Keys, Values];
 
           for (const [key, value] of Object.entries(option) as Entries[]) {
             if (
               value === undefined ||
-              (_.isArray(value) && value.length === 0)
+              (Array.isArray(value) && value.length === 0)
             ) {
               delete option[key];
             }
@@ -151,6 +156,9 @@ export class Client<T extends boolean> extends Discord.Client<T> {
           name: cmd.name,
           description: cmd.description,
           type: cmd.type,
+          defaultMemberPermissions: new Discord.PermissionsBitField(
+            cmd.defaultMemberPermissions ?? []
+          ),
           options: cmd.options.map(mapper)
         };
 
@@ -163,10 +171,13 @@ export class Client<T extends boolean> extends Discord.Client<T> {
               ? command.description ?? "No description provided"
               : "",
           type,
+          defaultMemberPermissions: new Discord.PermissionsBitField(
+            command.defaultPermissions ?? []
+          ),
           options: (command.options ?? []).map(mapper)
         };
 
-        if (_.isEqual(cmdObject, commandObject)) {
+        if (isEqual(cmdObject, commandObject)) {
           continue;
         }
 
@@ -190,19 +201,20 @@ export class Client<T extends boolean> extends Discord.Client<T> {
     embedOptions: Discord.EmbedData,
     user?: Discord.User
   ): Discord.EmbedBuilder {
+    const footerText =
+      embedOptions.footer?.text !== undefined
+        ? ` | ${embedOptions.footer.text}`
+        : "";
+
     embedOptions.footer = {
-      text: `${Client.siteURL}${
-        embedOptions.footer?.text !== undefined
-          ? ` | ${embedOptions.footer.text}`
-          : ""
-      }`,
+      text: `${Client.siteURL}${footerText}`,
       iconURL: Client.iconURL
     };
 
     if (embedOptions.author === undefined && user !== undefined) {
       embedOptions.author = {
         name: user.username,
-        iconURL: user.avatarURL({ forceStatic: false }) ?? ""
+        iconURL: user.avatarURL() ?? undefined
       };
     }
 
@@ -284,17 +296,17 @@ export class Client<T extends boolean> extends Discord.Client<T> {
 
   public async getChannel(
     channel: keyof Keymash.Channels
-  ): Promise<Keymash.ChannelTypes> {
+  ): Promise<Discord.TextBasedChannel | undefined> {
     const guild = await this.guild;
 
     const guildChannel = guild?.channels?.cache.find(
       (ch) => ch.id === this.clientOptions.channels[channel]
     );
 
-    if (guildChannel?.type === Discord.ChannelType.GuildText) {
+    if (!guildChannel?.isTextBased()) {
       return;
     }
 
-    return guildChannel as Keymash.ChannelTypes;
+    return guildChannel;
   }
 }

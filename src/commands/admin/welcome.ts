@@ -1,3 +1,4 @@
+import { PermissionFlagsBits } from "discord.js";
 import { Client } from "../../structures/client";
 import type { Keymash } from "../../types";
 
@@ -5,7 +6,7 @@ export default {
   name: "welcome",
   description: "Sends embeds in the welcome channel",
   category: "Admin",
-  needsPermissions: true,
+  defaultPermissions: [PermissionFlagsBits.ManageGuild],
   run: async (interaction, client) => {
     const channel = await client.getChannel("welcome");
 
@@ -18,7 +19,7 @@ export default {
       return;
     }
 
-    const descEmbed = client.embed({
+    const welcomeEmbed = client.embed({
       title: "Keymash - The Future of Competitive Typing",
       description:
         "Welcome to the official Keymash Discord! Please take a moment to read below for some information and rules!",
@@ -54,26 +55,26 @@ export default {
       }))
     });
 
-    const contributeEmbed = client.embed({
-      title: "Contribute to Keymash",
-      thumbnail: {
-        url: Client.thumbnails.moneyBag
-      },
-      color: 0x50e3c2,
-      fields: [
-        {
-          name: "Want to submit some quotes/texts?",
-          value: "[Add them here](https://keymash.io/submit)"
-        },
-        {
-          name: "Want to directly support Keymash?",
-          value:
-            "[Join our Patreon](https://patreon.com/keymashgame) (You get a cool badge!)"
-        }
-      ]
-    });
+    // const contributeEmbed = client.embed({
+    //   title: "Contribute to Keymash",
+    //   thumbnail: {
+    //     url: Client.thumbnails.moneyBag
+    //   },
+    //   color: 0x50e3c2,
+    //   fields: [
+    //     {
+    //       name: "Want to submit some quotes/texts?",
+    //       value: "[Add them here](https://keymash.io/submit)"
+    //     },
+    //     {
+    //       name: "Want to directly support Keymash?",
+    //       value:
+    //         "[Join our Patreon](https://patreon.com/keymashgame) (You get a cool badge!)"
+    //     }
+    //   ]
+    // });
 
-    channel.send({ embeds: [descEmbed, rulesEmbed, contributeEmbed] });
+    channel.send({ embeds: [welcomeEmbed, rulesEmbed /*, contributeEmbed*/] });
     interaction.reply({
       ephemeral: true,
       content: "✅ The welcome channel has been sent."

@@ -20,7 +20,8 @@
       {
         "allowExpressions": true
       }
-    ]
+    ],
+    "@typescript-eslint/no-import-type-side-effects": "error"
   },
   "plugins": ["prettier"]
 }

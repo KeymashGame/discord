@@ -1,12 +1,13 @@
 import * as Discord from "discord.js";
-import { getDiscordData } from "../../functions/discord";
-import { getPlayerFromID, getPlayerFromUsername } from "../../functions/player";
-import { Keymash } from "../../types";
+import type { Keymash } from "../../types";
+import { getDiscordData } from "../../utils/discord";
+import { getPlayerFromID, getPlayerFromUsername } from "../../utils/player";
 
 export default {
   name: "user",
   description: "Shows your stats",
   category: "Stats",
+  type: Discord.ApplicationCommandType.ChatInput,
   options: [
     {
       name: "username",
@@ -18,22 +19,84 @@ export default {
   run: async (interaction, client) => {
     await interaction.deferReply();
 
-    const username = interaction.options
-      .get("username", false)
-      ?.value?.toString()
-      ?.replace("#", "-");
+    const username =
+      interaction.options.getString("username", false)?.replace("#", "-") ??
+      undefined;
 
-    const discordData =
-      username === undefined
-        ? await getDiscordData(client, interaction.user.id)
-        : undefined;
+    async function getInfo(): Promise<Keymash.PlayerInfoData | undefined> {
+      if (username === undefined) {
+        const discordData = await getDiscordData(client, interaction.user.id);
 
-    if (username === undefined || discordData === undefined) {
+        if (discordData === undefined) {
+          interaction.followUp({
+            embeds: [
+              client.embed({
+                title: "Operation Failed",
+                description: "Please link your account with /link.",
+                color: 0xff0000
+              })
+            ]
+          });
+
+          return;
+        }
+
+        const info = await getPlayerFromID(
+          client,
+          discordData.playerId,
+          "info"
+        );
+
+        if (info === undefined) {
+          interaction.followUp({
+            embeds: [
+              client.embed({
+                title: "Operation Failed",
+                description: "Could not find your account.",
+                color: 0xff0000
+              })
+            ]
+          });
+
+          return;
+        }
+
+        return info;
+      } else {
+        const info = await getPlayerFromUsername(client, username, "info");
+
+        if (info === undefined) {
+          interaction.followUp({
+            embeds: [
+              client.embed({
+                title: "Operation Failed",
+                description: "Could not find this player.",
+                color: 0xff0000
+              })
+            ]
+          });
+
+          return;
+        }
+
+        return info;
+      }
+    }
+
+    const info = await getInfo();
+
+    if (info === undefined) {
+      return;
+    }
+
+    const stats = await getPlayerFromID(client, info.playerId, "statistics");
+
+    if (stats === undefined) {
       interaction.followUp({
         embeds: [
           client.embed({
             title: "Operation Failed",
-            description: "Please link your account with /link.",
+            description: "Could not find stats.",
             color: 0xff0000
           })
         ]
@@ -41,17 +104,6 @@ export default {
 
       return;
     }
-
-    console.log(username);
-    const info =
-      username === undefined
-        ? await getPlayerFromID(client, discordData.playerId, "info")
-        : await getPlayerFromUsername(client, username, "info");
-
-    const [stats] = await Promise.all([
-      // getPlayerFromID(client, info.playerId, "ranked"),
-      getPlayerFromID(client, info.playerId, "statistics")
-    ]);
 
     const embed = client.embed({
       description: info.description,
@@ -85,12 +137,6 @@ export default {
           value: `${stats.matchesQuit.toLocaleString()}`,
           inline: true
         }
-        /*
-        { name: "Ranked Level", value: `${ranked?.Rank?.Rank || "Unrated"}` },
-        {
-          name: "Ranked Games",
-          value: `${(ranked?.Rank?.Games || 0).toLocaleString()}`
-        }*/
       ]
     });
 
@@ -98,4 +144,4 @@ export default {
       embeds: [embed]
     });
   }
-} as Keymash.Command;
+} as Keymash.Command<Discord.ApplicationCommandType.ChatInput>;

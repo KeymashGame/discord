@@ -1,8 +1,8 @@
 import "colors";
+import * as Discord from "discord.js";
 import { config } from "dotenv";
-import clientOptions from "./config/config.json";
+import clientOptions from "./config/config.json" assert { type: "json" };
 import { Client } from "./structures/client";
-import type { Keymash } from "./types";
 
 console.clear();
 
@@ -13,8 +13,11 @@ if (process.env["TOKEN"] === undefined) {
 }
 
 const client = new Client({
-  ...(clientOptions as Keymash.ClientOptions),
-  intents: [1, 2, 512]
+  ...clientOptions,
+  intents: [
+    Discord.GatewayIntentBits.Guilds,
+    Discord.GatewayIntentBits.GuildMembers
+  ]
 });
 
 client.start(process.env["TOKEN"]).then(console.log);

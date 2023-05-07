@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Discord Bot
         run: |
-          pm2 startOrRestart ecosystem.config.js --env production
+          pm2 startOrRestart ecosystem.config.cjs --env production
         working-directory: ./
         env:
           TOKEN: ${{ secrets.DISCORD_TOKEN }}
