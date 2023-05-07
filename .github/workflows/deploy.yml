@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - uses: dcodeIO/setup-node-nvm@master
         with:
           node-version: "18.16.0"
 
