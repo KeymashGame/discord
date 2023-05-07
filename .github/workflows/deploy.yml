@@ -24,9 +24,7 @@ jobs:
         working-directory: ./
 
       - name: Run Discord Bot
-        run: |
-          nvm use 18
-          pm2 startOrRestart ecosystem.config.cjs --env production
+        run: pm2 startOrRestart ecosystem.config.cjs --env production
         working-directory: ./
         env:
           TOKEN: ${{ secrets.DISCORD_TOKEN }}
