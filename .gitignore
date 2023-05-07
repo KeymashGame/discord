@@ -1,3 +1,7 @@
+# Yarn
+.yarn/cache
+.yarn/install-state.gz
+
 # Logs
 .idea
 logs
