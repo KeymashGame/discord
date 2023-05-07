@@ -25,6 +25,7 @@ jobs:
 
       - name: Run Discord Bot
         run: |
+          nvm use 18
           pm2 startOrRestart ecosystem.config.cjs --env production
         working-directory: ./
         env:
